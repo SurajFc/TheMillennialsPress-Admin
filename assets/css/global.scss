@@ -1,0 +1,84 @@
+// Import Bulma's core
+@import '~bulma/sass/utilities/_all';
+
+// Set your colors
+$primary: #040404;
+$primary-invert: findColorInvert($primary);
+
+$secondary: #ec2400;
+$transparent: rgba(19, 18, 18, 0.78);
+
+$twitter: #4099ff;
+$twitter-invert: findColorInvert($twitter);
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+  'white': (
+    $white,
+    $black,
+  ),
+  'black': (
+    $black,
+    $white,
+  ),
+  'light': (
+    $light,
+    $light-invert,
+  ),
+  'dark': (
+    $dark,
+    $dark-invert,
+  ),
+  'primary': (
+    $primary,
+    $primary-invert,
+  ),
+  'info': (
+    $info,
+    $info-invert,
+  ),
+  'success': (
+    $success,
+    $success-invert,
+  ),
+  'warning': (
+    $warning,
+    $warning-invert,
+  ),
+  'danger': (
+    $danger,
+    $danger-invert,
+  ),
+  'twitter': (
+    $twitter,
+    $twitter-invert,
+  ),
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// $sidebar-width: 350px;
+$sidebar-mobile-width: 100px;
+$sidebar-box-shadow: 5px 0px 13px 3px rgba($white, 0.1);
+// $menu-item-color: $primary;
+// $menu-item-hover-color: $secondary;
+// $menu-item-active-color: $secondary;
+
+//Modal Card
+$modal-content-width: 500px;
+$modal-background-background-color: $transparent;
+$modal-card-head-background-color: $white;
+$modal-card-head-border-bottom: 0px;
+$modal-card-head-padding: 15px;
+$modal-card-head-radius: 10px;
+$modal-card-foot-radius: 10px;
+$modal-card-foot-border-top: 0px;
+
+$table-row-active-background-color: $secondary;
+
+// Import Bulma and Buefy styles
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
