@@ -34,7 +34,11 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/vee-validate.js', '~/plugins/imageurl.js'],
+  plugins: [
+    '~/plugins/vee-validate.js', 
+    '~/plugins/imageurl.js',
+    {src:'~/plugins/vue-picture-input',ssr:false}
+],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -73,8 +77,19 @@ export default {
     middleware: ['auth'],
   },
   auth: {
+    localStorage: false,
+         cookie: {
+            prefix: 'auth.',
+            options: {
+            path: '/',
+            maxAge:2592000, //30days
+            expires:30,
+    }
+  },
     strategies: {
       local: {
+
+
         endpoints: {
           login: {
             url: '/login',
@@ -88,7 +103,9 @@ export default {
         tokenType: 'Token',
         globalToken: true,
         autoFetchUser: true,
+          
       },
     },
   },
+        
 }

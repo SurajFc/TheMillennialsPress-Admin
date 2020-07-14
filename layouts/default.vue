@@ -51,7 +51,12 @@
                       tag="nuxt-link"
                       to="/"
                     ></b-menu-item>
-                    <b-menu-item icon="ab-testing" to="/category" label="Category" tag="nuxt-link">
+                    <b-menu-item
+                      icon="ab-testing"
+                      to="/category"
+                      label="Category"
+                      tag="nuxt-link"
+                    >
                       <!-- <b-menu-item icon="account" label="Users"></b-menu-item>
                       <b-menu-item
                        expanded
@@ -64,23 +69,50 @@
                         disabled
                       ></b-menu-item>-->
                     </b-menu-item>
-                    <b-menu-item icon="newspaper-variant" to="/inspire" label="Articles">
-                      <!-- <b-menu-item icon="account-box" label="Add"></b-menu-item>
+                    <b-menu-item
+                      icon="newspaper-variant"
+                      label="Articles"
+                      expanded
+                    >
+                      <!-- <b-menu-item icon="account-box" label="Add"></b-menu-item> -->
                       <b-menu-item
-                        icon="home-account"
-                        label="Edit"
-                      ></b-menu-item>-->
+                        icon="plus-circle-outline"
+                        label="Add"
+                        to="/addarticle"
+                        tag="nuxt-link"
+                      ></b-menu-item>
+                      <b-menu-item
+                        icon="pencil-ruler"
+                        label="View/Edit"
+                        to
+                      ></b-menu-item>
                     </b-menu-item>
 
-                    <b-menu-item icon="arrow-up" label="Best Articles"></b-menu-item>
-                    <b-menu-item icon="currency-inr" label="Donations"></b-menu-item>
-                    <b-menu-item icon="thumb-up-outline" label="Feedbacks"></b-menu-item>
+                    <b-menu-item
+                      icon="arrow-up"
+                      label="Best Articles"
+                    ></b-menu-item>
+                    <b-menu-item
+                      icon="currency-inr"
+                      label="Donations"
+                    ></b-menu-item>
+                    <b-menu-item
+                      icon="thumb-up-outline"
+                      label="Feedbacks"
+                    ></b-menu-item>
                   </b-menu-list>
 
                   <b-menu-list label="Actions">
-                    <b-menu-item icon="shield-account-outline" to="/inspire" label="User">
+                    <b-menu-item
+                      icon="shield-account-outline"
+                      to="/inspire"
+                      label="User"
+                    >
                       <b-menu-item icon="account-box" label="Add"></b-menu-item>
-                      <b-menu-item icon="home-account" label="Edit"></b-menu-item>
+                      <b-menu-item
+                        icon="home-account"
+                        label="Edit"
+                      ></b-menu-item>
                     </b-menu-item>
                     <b-menu-item icon="logout" label="Logout"></b-menu-item>
                   </b-menu-list>
@@ -105,7 +137,10 @@
             <div class="level-item has-text-centered box">
               <div>
                 <p class="heading">
-                  <b-icon icon="newspaper-variant" custom-size="mdi-18px"></b-icon>
+                  <b-icon
+                    icon="newspaper-variant"
+                    custom-size="mdi-18px"
+                  ></b-icon>
                   <span class="is-size-7">Articles</span>
                 </p>
                 <p class="title">123</p>
@@ -123,7 +158,10 @@
             <div class="level-item has-text-centered box">
               <div>
                 <p class="heading">
-                  <b-icon icon="thumb-up-outline" custom-size="mdi-18px"></b-icon>
+                  <b-icon
+                    icon="thumb-up-outline"
+                    custom-size="mdi-18px"
+                  ></b-icon>
                   <span class="is-size-7">Feedbacks</span>
                 </p>
                 <p class="title">16</p>
@@ -146,8 +184,8 @@ export default {
     async logoutUser() {
       await this.$auth.logout()
       this.$router.push('/login')
-    },
-  },
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

@@ -44,7 +44,7 @@ extend('min', {
     return value.length >= min
   },
   params: ['min'],
-  message: 'Password must be greater than 6 characters',
+  message: 'Must be greater than 6 characters',
 })
 
 extend('max', {
@@ -52,5 +52,5 @@ extend('max', {
     return value.length < max
   },
   params: ['max'],
-  message: 'Password must be greater than 20 characters',
+  message: 'Must be greater than 20 characters',
 })

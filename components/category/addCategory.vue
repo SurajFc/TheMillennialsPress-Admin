@@ -80,11 +80,14 @@
 </template>
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import toast from '../../mixins/toast.js'
+
 export default {
   components: {
     ValidationObserver,
     ValidationProvider
   },
+  mixins: [toast],
   data() {
     return {
       file: null,
@@ -108,6 +111,7 @@ export default {
         await this.$axios.$post('category', fd)
         this.$emit('refreshdata1')
         this.$parent.close()
+        this.Toast({ message: 'Succesfully Added', type: 'is-success' })
       } catch (error) {
         console.log(error)
       }

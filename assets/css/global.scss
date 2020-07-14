@@ -6,6 +6,7 @@ $primary: #040404;
 $primary-invert: findColorInvert($primary);
 
 $secondary: #ec2400;
+$secondary-invert: findColorInvert($secondary);
 $transparent: rgba(19, 18, 18, 0.78);
 
 $twitter: #4099ff;
@@ -49,6 +50,11 @@ $colors: (
     $danger,
     $danger-invert,
   ),
+'secondary':(
+  $secondary,
+  $secondary-invert
+),
+  
   'twitter': (
     $twitter,
     $twitter-invert,
@@ -82,3 +88,5 @@ $table-row-active-background-color: $secondary;
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
+
+

@@ -86,69 +86,52 @@
 </template>
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-
+import toast from '../../mixins/toast.js'
 export default {
-    props:['name','description','image','id'],
-    components:{
-        ValidationObserver,
-        ValidationProvider,
-    },
-    data(){
-        return {
-          file:null,
-            formData:{
-              cat:this.id,
-            name:this.name,
-            description:this.description,
-            }
-        };
-    }
-    ,methods:{
-       async saveCategory(){
-         const fd = new FormData();
-         if(this.file){ 
-            fd.append("image",this.file,this.file.name);
-           for(var key in this.formData){
-           
-               fd.append(key,this.formData[key])
-               console.log(key)
-            
-           }
-            console.log(fd);
-           
-         }
-         else{
-            for(var key in this.formData){
-           
-               fd.append(key,this.formData[key])
-              
-           }
-            console.log(fd);
-            
-         }
-          try{
-              await this.$axios.$post('editcategory',fd)
-              //  this.RefreshCategory();
-             
-              console.log(this.$emit('refreshdata'))
-               this.$emit('refreshdata')
-               this.$parent.close();
-             
-     
-            }
-          catch(error){
-                console.log(error);
-            }
-    },
-
-    
+  props: ['name', 'description', 'image', 'id'],
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  },
+  mixins: [toast],
+  data() {
+    return {
+      file: null,
+      formData: {
+        cat: this.id,
+        name: this.name,
+        description: this.description
       }
-      ,
-
-
-     
     }
-
+  },
+  methods: {
+    async saveCategory() {
+      const fd = new FormData()
+      if (this.file) {
+        fd.append('image', this.file, this.file.name)
+        for (var key in this.formData) {
+          fd.append(key, this.formData[key])
+          console.log(key)
+        }
+        console.log(fd)
+      } else {
+        for (var key in this.formData) {
+          fd.append(key, this.formData[key])
+        }
+        console.log(fd)
+      }
+      try {
+        await this.$axios.$post('editcategory', fd)
+        //  this.RefreshCategory();
+        this.$emit('refreshdata')
+        this.$parent.close()
+        this.Toast({ message: 'Edit  Success', type: 'is-info' })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+}
 </script>
 <style scoped>
 </style>
