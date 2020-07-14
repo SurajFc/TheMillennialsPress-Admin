@@ -29,7 +29,13 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~assets/css/global.scss'],
+  css: [
+    '~assets/css/global.scss',
+
+      'quill/dist/quill.core.css',
+    // for snow theme
+    'quill/dist/quill.snow.css',
+],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -37,7 +43,9 @@ export default {
   plugins: [
     '~/plugins/vee-validate.js', 
     '~/plugins/imageurl.js',
-    {src:'~/plugins/vue-picture-input',ssr:false}
+    {src:'~/plugins/vue-picture-input',ssr:false},
+     { src: '~plugins/nuxt-quill-plugin', ssr: false }
+   
 ],
   /*
    ** Auto import components
@@ -72,6 +80,7 @@ export default {
    */
   build: {
     transpile: ['vee-validate/dist/rules'],
+  
   },
   router: {
     middleware: ['auth'],

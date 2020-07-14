@@ -44,7 +44,7 @@ extend('min', {
     return value.length >= min
   },
   params: ['min'],
-  message: 'Must be greater than 6 characters',
+  message: 'The {_field_} field must have at least {min} characters'
 })
 
 extend('max', {
@@ -52,5 +52,6 @@ extend('max', {
     return value.length < max
   },
   params: ['max'],
-  message: 'Must be greater than 20 characters',
+  message: 'The {_field_} field must be less than {max} characters'
 })
+

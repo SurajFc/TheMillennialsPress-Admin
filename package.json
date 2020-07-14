@@ -16,9 +16,13 @@
     "node-sass": "^4.14.1",
     "nuxt": "^2.13.0",
     "nuxt-buefy": "^0.3.31",
+    "quill-emoji": "^0.1.7",
+    
     "sass-loader": "^9.0.2",
+    "tinymce-vue-2": "0.0.5",
     "vee-validate": "^3.3.7",
-    "vue-picture-input": "^2.1.6"
+    "vue-picture-input": "^2.1.6",
+    "vue-quill-editor": "^3.0.6"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",
