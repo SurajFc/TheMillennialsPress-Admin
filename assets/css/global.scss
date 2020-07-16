@@ -85,6 +85,12 @@ $modal-card-foot-border-top: 0px;
 
 $table-row-active-background-color: $secondary;
 
+
+$datepicker-background-color:$white;
+$datepicker-header-color:$white;
+$datepicker-header-color:$danger;
+$datepicker-radius	:50px;
+
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';

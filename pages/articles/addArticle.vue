@@ -8,7 +8,7 @@
         @submit.prevent="passes(saveArticle)"
       >
         <ValidationProvider
-          rules="required|min:10|max:200"
+          rules="required|min:20|max:200"
           name="title"
           v-slot="{ errors, valid }"
         >
@@ -22,7 +22,6 @@
               type="text"
               v-model="formData.title"
               placeholder="Article Title"
-              required
             ></b-input>
           </b-field>
         </ValidationProvider>
@@ -36,11 +35,7 @@
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             custom-class="has-text-left"
           >
-            <b-select
-              placeholder="Select Category"
-              expanded
-              v-model="formData.category"
-            >
+            <b-select placeholder="Select Category" v-model="formData.category">
               <option value="">None</option>
               <option
                 v-for="option in categories"
@@ -70,6 +65,7 @@
                 <b-icon size="is-small" icon="help-circle-outline"></b-icon>
               </b-tooltip>
             </template>
+            {{ formData.tags }}
             <b-taginput
               ellipsis
               maxlength="20"
@@ -88,39 +84,24 @@
         <br />
         <b-field
           class="file"
-          vertical
           label="Cover"
+          horizontal
           custom-class="has-text-left"
         >
-          <template slot="label">
-            Cover
-            <b-tooltip type="is-dark" label="Image should be less than 1Mb">
-              <b-icon size="is-small" icon="help-circle-outline"></b-icon>
-            </b-tooltip>
-          </template>
-
-          <picture-input
-            ref="pictureInput"
-            required
-            width="600"
-            height="350"
-            margin="16"
-            accept="image/jpeg,image/png"
-            size="1"
-            :alertOnError="true"
-            button-class="button is-primary"
-            :custom-strings="{
-              upload: '<h1>Bummer!</h1>',
-              drag: 'Drag a 😺 photo or GTFO',
-            }"
-            @change="onChange"
-          >
-          </picture-input>
+          <b-upload v-model="cover" drag-drop>
+            <a class="button is-primary">
+              <b-icon icon="upload"></b-icon>
+              <span>Click to upload</span>
+            </a>
+          </b-upload>
+          <span class="file-name" v-if="cover">
+            {{ cover.name }}
+          </span>
         </b-field>
         <br />
-        <div class="section" style="max-height: 400px; overflow: auto;">
+        <div class="section">
           <ValidationProvider
-            rules="required|min:1000"
+            rules="required|min:500"
             name="Content"
             v-slot="{ errors, valid }"
           >
@@ -143,7 +124,6 @@
             </b-field>
             <client-only>
               <quill-editor
-                class="editor"
                 v-model="formData.content"
                 :options="editorOption"
                 ref="editor"
@@ -155,6 +135,45 @@
             <div></div>
           </ValidationProvider>
         </div>
+        <b-field label="Publish Time" horizontal custom-class="has-text-left ">
+          <b-datetimepicker
+            style="width: 33%;"
+            placeholder="Type or select a date..."
+            icon="calendar-today"
+            v-model="formData.realease"
+            :min-datetime="minDatetime"
+            :max-datetime="maxDatetime"
+            position="is-top-right"
+            :timepicker="{ hourFormat: '12' }"
+          >
+          </b-datetimepicker>
+        </b-field>
+        <ValidationProvider
+          rules="required|min:5"
+          name="author"
+          v-slot="{ errors, valid }"
+        >
+          <b-field
+            horizontal
+            label="Author"
+            custom-class="has-text-left "
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
+          >
+            <b-input
+              type="text"
+              v-model="formData.author_name"
+              placeholder="author"
+              style="width: 33%;"
+            ></b-input>
+          </b-field>
+        </ValidationProvider>
+        <br />
+        <div class="field has-text-centered">
+          <button class="button is-black" size="is-medium">
+            Save
+          </button>
+        </div>
       </form>
     </ValidationObserver>
   </div>
@@ -162,7 +181,10 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import toast from '../mixins/toast.js'
+import toast from '../..//mixins/toast.js'
+// import { ImageResize } from 'quill-image-resize-module'
+
+// this.$refs.editor.quill.register('modules/imageResize', ImageResize)
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
@@ -186,26 +208,40 @@ const toolbarOptions = [
 
 export default {
   name: 'AddArticle',
+  // head: {
+  //   script: [{ src: 'js/image-resize.min.js' }]
+  // },
   mixins: [toast],
   components: {
     ValidationObserver,
     ValidationProvider
   },
-  // head: {
-  //   script: [
-  //     { src: '/node_modules/quill-image-resize-module/image-resize.min.js' }
-  //   ]
-  // },
+
   data() {
+    const min = new Date()
+    min.setDate(min.getDate() - 0)
+    min.setHours(min.getHours())
+    min.setMinutes(min.getMinutes())
+    min.setSeconds(min.getSeconds())
+    const max = new Date()
+    max.setDate(max.getDate() + 7)
+    max.setHours(18)
+    max.setMinutes(0)
+    max.setSeconds(0)
+
     return {
       categories: [],
-
+      minDatetime: min,
+      maxDatetime: max,
+      cover: null,
       formData: {
         title: '',
-        cover: null,
+
         category: '',
         tags: [],
-        content: '<p>I am Example</p>'
+        content: '<p>I am Example</p>',
+        realease: new Date(),
+        author_name: ''
       },
       editorOption: {
         // Some Quill options...
@@ -216,7 +252,16 @@ export default {
             handlers: {
               image: this.imageHandler
             },
-            ImageResize: {}
+            imageResize: true,
+            ImageResize: {
+              displaySize: true,
+              displayStyles: {
+                backgroundColor: 'black',
+                border: 'none',
+                color: 'white'
+              },
+              modules: ['Resize', 'DisplaySize', 'Toolbar']
+            }
           },
           history: {
             delay: 1000,
@@ -248,50 +293,86 @@ export default {
 
       input.onchange = async () => {
         const file = input.files[0]
-        const formData = new FormData()
+        if (file.size < 1048576) {
+          const formData = new FormData()
+          formData.append('image', file)
+          formData.append('added_by', this.$auth.user[0].email)
 
-        formData.append('image', file)
-        formData.append('added_by', this.$auth.user[0].email)
+          // Save current cursor state
+          const range = this.$refs.editor.quill.getSelection(true)
 
-        // Save current cursor state
-        const range = this.$refs.editor.quill.getSelection(true)
+          console.log('here')
 
-        console.log('here')
+          // Move cursor to right side of image (easier to continue typing)
+          this.$refs.editor.quill.setSelection(range.index + 1)
 
-        // Move cursor to right side of image (easier to continue typing)
-        this.$refs.editor.quill.setSelection(range.index + 1)
-
-        await this.$axios
-          .$post('article/images', formData)
-          .then(res => {
-            this.$refs.editor.quill.insertEmbed(
-              range.index,
-              'image',
-              `${this.$imageURL}${res.image}`
-            )
-            this.Toast({
-              message: 'Image Uploaded Success',
-              type: 'is-success'
+          await this.$axios
+            .$post('article/images', formData)
+            .then(res => {
+              this.$refs.editor.quill.insertEmbed(
+                range.index,
+                'image',
+                `${this.$imageURL}${res.image}`
+              )
+              this.Toast({
+                message: 'Image Uploaded Success',
+                type: 'is-success'
+              })
             })
+            .catch(e => {
+              this.Toast({
+                message: 'Some Error. Pls Try Again',
+                type: 'is-danger'
+              })
+            }) // API post, returns image
+        } else {
+          console.log(file.size)
+          this.Toast({
+            message: 'Size of image should be less than 1 MB',
+            type: 'is-danger'
           })
-          .catch(e => {
-            this.Toast({
-              message: 'Some Error. Pls Try Again',
-              type: 'is-danger'
-            })
-          }) // API post, returns image location as string e.g. 'http://www.example.com/images/foo.png'
+        }
+        // location as string e.g. 'http://www.example.com/images/foo.png'
       }
     },
 
-    saveArticle() {},
-    onChange(image) {
-      console.log('New picture selected!')
-      if (image) {
-        console.log('Picture loaded.')
-        this.formData.cover = image
-      } else {
-        // console.log('FileReader API not supported: use the <form>, Luke!')
+    async saveArticle() {
+      const fd = new FormData()
+
+      if (this.cover) {
+        fd.append('cover', this.cover)
       }
+
+      fd.append('user', this.$auth.user[0].email)
+      for (var key in this.formData) {
+        if (key == 'tags') {
+          for (var i = 0; i < this.formData.tags.length; i++) {
+            fd.append(key, this.formData.tags[i])
+          }
+        } else {
+          fd.append(key, this.formData[key])
+        }
+      }
+
+      await this.$axios
+        .$post('addarticle', fd)
+        .then(res => {
+          this.$router.push('/articles/viewarticle')
+          this.Toast({ message: 'Succesfully Added', type: 'is-success' })
+        })
+        .catch()
+    },
+    // onChange(image) {
+    //   console.log('New picture selected!')
+    //   if (image) {
+    //     console.log('Picture loaded.')
+    //     this.cover = image
+    //   } else {
+    //     console.log('FileReader API not supported: use the <form>, Luke!')
+    //   }
+    // },
+    deleteDropFile() {
+      this.cover = ''
     },
     onEditorBlur(editor) {
       // console.log('editor blur!', editor)
@@ -309,15 +390,3 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
-.container {
-  width: 60%;
-  margin: 0 auto;
-  padding: 50px 0;
-  .editor {
-    min-height: 200px;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-}
-</style>

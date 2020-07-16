@@ -1,3 +1,5 @@
+var webpack = require('webpack')
+
 export default {
   /*
    ** Nuxt rendering mode
@@ -35,6 +37,7 @@ export default {
       'quill/dist/quill.core.css',
     // for snow theme
     'quill/dist/quill.snow.css',
+   
 ],
   /*
    ** Plugins to load before mounting the App
@@ -43,7 +46,7 @@ export default {
   plugins: [
     '~/plugins/vee-validate.js', 
     '~/plugins/imageurl.js',
-    {src:'~/plugins/vue-picture-input',ssr:false},
+    // {src:'~/plugins/vue-picture-input',ssr:false},
      { src: '~plugins/nuxt-quill-plugin', ssr: false }
    
 ],
@@ -80,7 +83,13 @@ export default {
    */
   build: {
     transpile: ['vee-validate/dist/rules'],
-  
+    plugins: [
+      new webpack.ProvidePlugin({
+        'window.Quill': 'quill/dist/quill.js',
+        'Quill': 'quill/dist/quill.js'
+      })
+    ]
+     
   },
   router: {
     middleware: ['auth'],

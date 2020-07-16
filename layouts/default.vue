@@ -78,13 +78,14 @@
                       <b-menu-item
                         icon="plus-circle-outline"
                         label="Add"
-                        to="/addarticle"
+                        to="/articles/addarticle"
                         tag="nuxt-link"
                       ></b-menu-item>
                       <b-menu-item
                         icon="pencil-ruler"
                         label="View/Edit"
-                        to
+                        to="/articles/viewarticle"
+                        tag="nuxt-link"
                       ></b-menu-item>
                     </b-menu-item>
 
