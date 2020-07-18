@@ -69,6 +69,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
+        'nuxt-moment'
+
   ],
   /*
    ** Axios module configuration

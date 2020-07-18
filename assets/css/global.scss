@@ -12,6 +12,12 @@ $transparent: rgba(19, 18, 18, 0.78);
 $twitter: #4099ff;
 $twitter-invert: findColorInvert($twitter);
 
+$facebook: #3B5998;
+$facebook-invert:findColorInvert($facebook);
+
+$linkedin: #0077B5;
+$linkedin-invert:findColorInvert($linkedin);
+
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
   'white': (
@@ -59,6 +65,15 @@ $colors: (
     $twitter,
     $twitter-invert,
   ),
+
+  'facebook': (
+    $facebook,
+    $facebook-invert,
+  ),
+  'linkedin':(
+    $linkedin,
+    $linkedin-invert,
+  )
 );
 
 // Links
@@ -90,6 +105,7 @@ $datepicker-background-color:$white;
 $datepicker-header-color:$white;
 $datepicker-header-color:$danger;
 $datepicker-radius	:50px;
+
 
 // Import Bulma and Buefy styles
 @import '~bulma';

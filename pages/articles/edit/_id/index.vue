@@ -5,7 +5,7 @@
       <form
         class="box"
         enctype="multipart/form-data"
-        @submit.prevent="passes(saveArticle)"
+        @submit.prevent="passes(editArticle)"
       >
         <ValidationProvider
           rules="required|min:20|max:200"
@@ -117,6 +117,11 @@
           <span class="file-name" v-if="cover">
             {{ cover.name }}
           </span>
+          <span v-else>
+            <figure>
+              <img :src="$imageURL + 'media/' + image" />
+            </figure>
+          </span>
         </b-field>
         <br />
         <div class="section">
@@ -201,7 +206,7 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import toast from '../..//mixins/toast.js'
+import toast from '~/mixins/toast.js'
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
@@ -225,9 +230,6 @@ const toolbarOptions = [
 
 export default {
   name: 'AddArticle',
-  // head: {
-  //   script: [{ src: 'js/image-resize.min.js' }]
-  // },
   mixins: [toast],
   components: {
     ValidationObserver,
@@ -251,13 +253,15 @@ export default {
       minDatetime: min,
       maxDatetime: max,
       cover: null,
+      image: null,
       formData: {
         title: '',
         subtitle: '',
+
         category: '',
         tags: [],
         content: '<p>I am Example</p>',
-        realease: new Date(),
+        realease: null,
         author_name: ''
       },
       editorOption: {
@@ -343,7 +347,6 @@ export default {
               })
             }) // API post, returns image
         } else {
-          console.log(file.size)
           this.Toast({
             message: 'Size of image should be less than 1 MB',
             type: 'is-danger'
@@ -353,7 +356,7 @@ export default {
       }
     },
 
-    async saveArticle() {
+    async editArticle() {
       this.formData.realease = this.$moment(this.formData.realease).format(
         'YYYY-MM-DD HH:mm'
       )
@@ -375,22 +378,22 @@ export default {
       }
 
       await this.$axios
-        .$post('addarticle', fd)
+        .$post(`editarticle?q=${this.$route.params.id}`, fd)
         .then(res => {
           this.$router.push('/articles/viewarticle')
-          this.Toast({ message: 'Succesfully Added', type: 'is-success' })
+          this.Toast({ message: 'Succesfully Edited', type: 'is-success' })
         })
         .catch()
     },
-    // onChange(image) {
-    //   console.log('New picture selected!')
-    //   if (image) {
-    //     console.log('Picture loaded.')
-    //     this.cover = image
-    //   } else {
-    //     console.log('FileReader API not supported: use the <form>, Luke!')
-    //   }
-    // },
+    onChange(image) {
+      console.log('New picture selected!')
+      if (image) {
+        console.log('Picture loaded.')
+        this.cover = image
+      } else {
+        console.log('FileReader API not supported: use the <form>, Luke!')
+      }
+    },
 
     onEditorBlur(editor) {
       // console.log('editor blur!', editor)
@@ -400,11 +403,28 @@ export default {
     },
     onEditorReady(editor) {
       // console.log('editor ready!', editor)
+    },
+    async getInitialData() {
+      await this.$axios
+        .$get(`article/view/${this.$route.params.id}`)
+        .then(res => {
+          console.log(res[0])
+          this.formData.title = res[0].title
+          this.formData.author_name = res[0].author_name
+          this.formData.tags = res[0].tags
+          this.image = res[0].cover
+          this.formData.subtitle = res[0].subtitle
+          this.formData.category = res[0].category
+          this.formData.realease = new Date(res[0].realease)
+          this.formData.content = res[0].content
+        })
+        .catch()
     }
   },
 
   mounted() {
     this.getCategories()
+    this.getInitialData()
   }
 }
 </script>

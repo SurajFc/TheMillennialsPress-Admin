@@ -90,8 +90,10 @@
                     </b-menu-item>
 
                     <b-menu-item
-                      icon="arrow-up"
-                      label="Best Articles"
+                      icon="account"
+                      label="Employees"
+                      tag="nuxt-link"
+                      to="/employee"
                     ></b-menu-item>
                     <b-menu-item
                       icon="currency-inr"
