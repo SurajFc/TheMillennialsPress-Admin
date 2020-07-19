@@ -4,7 +4,7 @@ export default {
                await  this.$buefy.toast.open({
                     duration: 2800,
                     message: message,
-                    position: 'is-top-right',
+                    position: 'is-top',
                     type: type
                 })
      }

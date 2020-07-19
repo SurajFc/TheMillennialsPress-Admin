@@ -118,7 +118,7 @@
             {{ cover.name }}
           </span>
           <span v-else>
-            <figure>
+            <figure class="image is-3by2">
               <img :src="$imageURL + 'media/' + image" />
             </figure>
           </span>

@@ -91,17 +91,21 @@
 
                     <b-menu-item
                       icon="account"
-                      label="Employees"
+                      label="Admins"
                       tag="nuxt-link"
-                      to="/employee"
+                      to="/admins"
                     ></b-menu-item>
                     <b-menu-item
                       icon="currency-inr"
                       label="Donations"
+                      tag="nuxt-link"
+                      to="/donation"
                     ></b-menu-item>
                     <b-menu-item
                       icon="thumb-up-outline"
                       label="Feedbacks"
+                      tag="nuxt-link"
+                      to="/feedbacks"
                     ></b-menu-item>
                   </b-menu-list>
 
@@ -127,50 +131,7 @@
       </div>
       <div class="column is-main-content">
         <div class="section">
-          <nav class="level">
-            <div class="level-item has-text-centered box">
-              <div>
-                <p class="heading">
-                  <b-icon icon="account" custom-size="mdi-18px"></b-icon>
-                  <span class="is-size-7">Users</span>
-                </p>
-                <p class="title">3,456</p>
-              </div>
-            </div>
-            <div class="level-item has-text-centered box">
-              <div>
-                <p class="heading">
-                  <b-icon
-                    icon="newspaper-variant"
-                    custom-size="mdi-18px"
-                  ></b-icon>
-                  <span class="is-size-7">Articles</span>
-                </p>
-                <p class="title">123</p>
-              </div>
-            </div>
-            <div class="level-item has-text-centered box">
-              <div>
-                <p class="heading">
-                  <b-icon icon="currency-inr" custom-size="mdi-18px"></b-icon>
-                  <span class="is-size-7">Donations</span>
-                </p>
-                <p class="title">124553</p>
-              </div>
-            </div>
-            <div class="level-item has-text-centered box">
-              <div>
-                <p class="heading">
-                  <b-icon
-                    icon="thumb-up-outline"
-                    custom-size="mdi-18px"
-                  ></b-icon>
-                  <span class="is-size-7">Feedbacks</span>
-                </p>
-                <p class="title">16</p>
-              </div>
-            </div>
-          </nav>
+          <PanelTop />
         </div>
         <nuxt />
       </div>
@@ -179,9 +140,10 @@
 </template>
 
 <script>
+import PanelTop from '~/components/paneltop.vue'
 export default {
-  data() {
-    return {}
+  components: {
+    PanelTop
   },
   methods: {
     async logoutUser() {

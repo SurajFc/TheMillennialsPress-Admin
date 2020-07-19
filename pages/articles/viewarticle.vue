@@ -29,6 +29,10 @@
       aria-previous-label="Previous page"
       aria-page-label="Page"
       aria-current-label="Current page"
+      :hoverable="true"
+      :mobile-cards="true"
+      detailed
+      detail-key="id"
     >
       <template slot-scope="props">
         <b-table-column label="#">
@@ -85,6 +89,48 @@
             view
           </b-button>
         </b-table-column>
+      </template>
+      <template slot="detail" slot-scope="props">
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img :src="$imageURL + props.row.cover" />
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <small>Author </small>
+                <strong>@{{ props.row.author_name }}</strong>
+
+                <br />
+                {{ props.row.subtitle }}
+              </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"
+                    ><i class="fas fa-reply"></i
+                  ></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"
+                    ><i class="fas fa-retweet"></i
+                  ></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"
+                    ><i class="fas fa-heart"></i
+                  ></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right has-bottom-right">
+            Added by: {{ props.row.user }}
+          </div>
+        </article>
       </template>
     </b-table>
   </div>
