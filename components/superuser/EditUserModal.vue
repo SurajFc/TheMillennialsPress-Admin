@@ -1,11 +1,7 @@
 <template>
   <div>
     <ValidationObserver ref="observer" v-slot="{ passes }">
-      <form
-        action
-        enctype="multipart/form-data"
-        @submit.prevent="passes(saveUser)"
-      >
+      <form action enctype="multipart/form-data" @submit.prevent="passes(saveUser)">
         <div class="modal-card" style="width: auto;">
           <header class="modal-card-head has-text-centered">
             <p class="modal-card-title">Edit User</p>
@@ -66,10 +62,7 @@
               </b-field>
             </ValidationProvider>
 
-            <ValidationProvider
-              rules="required|confirmed:password"
-              name="Password Confirmation"
-            >
+            <ValidationProvider rules="required|confirmed:password" name="Password Confirmation">
               <b-field
                 slot-scope="{ errors, valid }"
                 label="Confirm Password"
@@ -92,12 +85,8 @@
             </ValidationProvider>
           </section>
           <footer class="modal-card-foot">
-            <button class="button" type="button" @click="$parent.close()">
-              Close
-            </button>
-            <button class="button is-primary">
-              Save
-            </button>
+            <button class="button" type="button" @click="$parent.close()">Close</button>
+            <button class="button is-primary">Save</button>
           </footer>
         </div>
       </form>
@@ -107,20 +96,19 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import toast from '~/mixins/toast'
 
 export default {
   props: ['email', 'user_id'],
-  mixins: [toast],
+
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
   data() {
     return {
       old_password: '',
       password: '',
-      confirmation: ''
+      confirmation: '',
     }
   },
   methods: {
@@ -129,16 +117,16 @@ export default {
         .$post('superuserpass', {
           user_id: this.user_id,
           old_password: this.old_password,
-          password: this.password
+          password: this.password,
         })
-        .then(res => {
+        .then((res) => {
           this.$emit('refreshdata'),
             this.Toast({ message: 'Success', type: 'is-info' })
         })
 
         .finally(this.$parent.close())
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -1,36 +1,26 @@
 <template>
   <div class="section" style="margin-top: -60px;">
-    <p class="has-text-centered is-size-4 is-success">Add Articles</p>
+    <section>
+      <b-notification
+        type="is-secondary"
+        aria-close-label="Close notification"
+      >Please be Aware of what you do..!!!</b-notification>
+    </section>
+    <p class="has-text-centered is-size-4 is-success">Edit Articles</p>
     <ValidationObserver ref="observer" v-slot="{ passes }">
-      <form
-        class="box"
-        enctype="multipart/form-data"
-        @submit.prevent="passes(editArticle)"
-      >
-        <ValidationProvider
-          rules="required|min:20|max:200"
-          name="title"
-          v-slot="{ errors, valid }"
-        >
+      <form class="box" enctype="multipart/form-data" @submit.prevent="passes(editArticle)">
+        <ValidationProvider rules="required|min:20|max:200" name="title" v-slot="{ errors, valid }">
           <b-field
             vertical
             label="Title"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors"
           >
-            <b-input
-              type="text"
-              v-model="formData.title"
-              placeholder="Article Title"
-            ></b-input>
+            <b-input type="text" v-model="formData.title" placeholder="Article Title"></b-input>
           </b-field>
         </ValidationProvider>
         <br />
-        <ValidationProvider
-          rules="required|max:250"
-          name="subtitle"
-          v-slot="{ errors, valid }"
-        >
+        <ValidationProvider rules="required|max:250" name="subtitle" v-slot="{ errors, valid }">
           <b-field
             horizontal
             label="SubTitle"
@@ -38,11 +28,7 @@
             :message="errors"
             custom-class="has-text-left"
           >
-            <b-input
-              type="text"
-              v-model="formData.subtitle"
-              placeholder="SubTitle"
-            ></b-input>
+            <b-input type="text" v-model="formData.subtitle" placeholder="SubTitle"></b-input>
           </b-field>
         </ValidationProvider>
         <br />
@@ -56,22 +42,17 @@
             custom-class="has-text-left"
           >
             <b-select placeholder="Select Category" v-model="formData.category">
-              <option value="">None</option>
+              <option value>None</option>
               <option
                 v-for="option in categories"
                 :value="option.id"
                 :key="option.id"
-                >{{ option.name }}
-              </option></b-select
-            >
+              >{{ option.name }}</option>
+            </b-select>
           </b-field>
         </ValidationProvider>
         <br />
-        <ValidationProvider
-          rules="required"
-          v-slot="{ errors, valid }"
-          name="Tags"
-        >
+        <ValidationProvider rules="required" v-slot="{ errors, valid }" name="Tags">
           <b-field
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors"
@@ -96,27 +77,19 @@
               rounded
               v-model="formData.tags"
               placeholder="Add a tag (max 20)"
-            >
-            </b-taginput>
+            ></b-taginput>
           </b-field>
         </ValidationProvider>
 
         <br />
-        <b-field
-          class="file"
-          label="Cover"
-          horizontal
-          custom-class="has-text-left"
-        >
+        <b-field class="file" label="Cover" horizontal custom-class="has-text-left">
           <b-upload v-model="cover" drag-drop>
             <a class="button is-primary">
               <b-icon icon="upload"></b-icon>
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-name" v-if="cover">
-            {{ cover.name }}
-          </span>
+          <span class="file-name" v-if="cover">{{ cover.name }}</span>
           <span v-else>
             <figure class="image is-3by2">
               <img :src="$imageURL + 'media/' + image" />
@@ -125,11 +98,7 @@
         </b-field>
         <br />
         <div class="section">
-          <ValidationProvider
-            rules="required|min:500"
-            name="Content"
-            v-slot="{ errors, valid }"
-          >
+          <ValidationProvider rules="required|min:500" name="Content" v-slot="{ errors, valid }">
             <b-field
               horizontal
               label="Content"
@@ -143,7 +112,9 @@
                 </p>
               </div>
               <div v-if="valid">
-                <p><b-icon type="is-success" icon="check-circle"></b-icon></p>
+                <p>
+                  <b-icon type="is-success" icon="check-circle"></b-icon>
+                </p>
               </div>
               <br />
             </b-field>
@@ -170,14 +141,9 @@
             :max-datetime="maxDatetime"
             position="is-top-right"
             :timepicker="{ hourFormat: '12' }"
-          >
-          </b-datetimepicker>
+          ></b-datetimepicker>
         </b-field>
-        <ValidationProvider
-          rules="required|min:5"
-          name="author"
-          v-slot="{ errors, valid }"
-        >
+        <ValidationProvider rules="required|min:5" name="author" v-slot="{ errors, valid }">
           <b-field
             horizontal
             label="Author"
@@ -195,9 +161,7 @@
         </ValidationProvider>
         <br />
         <div class="field has-text-centered">
-          <button class="button is-black" size="is-medium">
-            Save
-          </button>
+          <button class="button is-black" size="is-medium">Save</button>
         </div>
       </form>
     </ValidationObserver>
@@ -206,7 +170,6 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import toast from '~/mixins/toast.js'
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
@@ -225,15 +188,15 @@ const toolbarOptions = [
   ['clean'],
   ['link', 'image', 'video', 'formula'],
 
-  ['emoji']
+  ['emoji'],
 ]
 
 export default {
   name: 'AddArticle',
-  mixins: [toast],
+
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
 
   data() {
@@ -262,7 +225,7 @@ export default {
         tags: [],
         content: '<p>I am Example</p>',
         realease: null,
-        author_name: ''
+        author_name: '',
       },
       editorOption: {
         // Some Quill options...
@@ -271,7 +234,7 @@ export default {
           toolbar: {
             container: toolbarOptions,
             handlers: {
-              image: this.imageHandler
+              image: this.imageHandler,
             },
             imageResize: true,
             ImageResize: {
@@ -279,21 +242,21 @@ export default {
               displayStyles: {
                 backgroundColor: 'black',
                 border: 'none',
-                color: 'white'
+                color: 'white',
               },
-              modules: ['Resize', 'DisplaySize', 'Toolbar']
-            }
+              modules: ['Resize', 'DisplaySize', 'Toolbar'],
+            },
           },
           history: {
             delay: 1000,
             maxStack: 50,
-            userOnly: false
+            userOnly: false,
           },
           'emoji-toolbar': true,
           'emoji-textarea': true,
-          'emoji-shortname': true
-        }
-      }
+          'emoji-shortname': true,
+        },
+      },
     }
   },
   methods: {
@@ -322,34 +285,32 @@ export default {
           // Save current cursor state
           const range = this.$refs.editor.quill.getSelection(true)
 
-          console.log('here')
-
           // Move cursor to right side of image (easier to continue typing)
           this.$refs.editor.quill.setSelection(range.index + 1)
 
-          await this.$axios
-            .$post('article/images', formData)
-            .then(res => {
-              this.$refs.editor.quill.insertEmbed(
-                range.index,
-                'image',
-                `${this.$imageURL}${res.image}`
-              )
-              this.Toast({
-                message: 'Image Uploaded Success',
-                type: 'is-success'
-              })
+          try {
+            const res = await this.$axios.$post('article/images', formData)
+
+            this.$refs.editor.quill.insertEmbed(
+              range.index,
+              'image',
+              `${this.$imageURL}${res.image}`
+            )
+
+            this.$store.dispatch('Toast', {
+              message: 'Image Uploaded Success',
+              type: 'is-success',
             })
-            .catch(e => {
-              this.Toast({
-                message: 'Some Error. Pls Try Again',
-                type: 'is-danger'
-              })
-            }) // API post, returns image
+          } catch {
+            this.$store.dispatch('Toast', {
+              message: 'Some Error',
+              type: 'is-danger',
+            })
+          } // API post, returns image
         } else {
-          this.Toast({
+          this.$store.dispatch('Toast', {
             message: 'Size of image should be less than 1 MB',
-            type: 'is-danger'
+            type: 'is-danger',
           })
         }
         // location as string e.g. 'http://www.example.com/images/foo.png'
@@ -376,16 +337,24 @@ export default {
           fd.append(key, this.formData[key])
         }
       }
+      try {
+        this.$axios.$post(`editarticle?q=${this.$route.params.id}`, fd)
+        this.$store.dispatch('Toast', {
+          message: 'Successfully Edit',
+          type: 'is-info',
+        })
 
-      this.$axios.$post(`editarticle?q=${this.$route.params.id}`, fd)
-
-      this.$router.push('/articles/viewarticle')
-      this.Toast({ message: 'Succesfully Edited', type: 'is-success' })
+        this.$router.push('/articles/viewarticle')
+      } catch {
+        this.$store.dispatch('Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
+        })
+      }
     },
     onChange(image) {
       console.log('New picture selected!')
       if (image) {
-        console.log('Picture loaded.')
         this.cover = image
       } else {
         console.log('FileReader API not supported: use the <form>, Luke!')
@@ -402,26 +371,30 @@ export default {
       // console.log('editor ready!', editor)
     },
     async getInitialData() {
-      await this.$axios
-        .$get(`article/view/${this.$route.params.id}`)
-        .then(res => {
-          console.log(res[0])
-          this.formData.title = res[0].title
-          this.formData.author_name = res[0].author_name
-          this.formData.tags = res[0].tags
-          this.image = res[0].cover
-          this.formData.subtitle = res[0].subtitle
-          this.formData.category = res[0].category
-          this.formData.realease = new Date(res[0].realease)
-          this.formData.content = res[0].content
+      try {
+        const res = await this.$axios.$get(
+          `article/view/${this.$route.params.id}`
+        )
+        this.formData.title = res[0].title
+        this.formData.author_name = res[0].author_name
+        this.formData.tags = res[0].tags
+        this.image = res[0].cover
+        this.formData.subtitle = res[0].subtitle
+        this.formData.category = res[0].category
+        this.formData.realease = new Date(res[0].realease)
+        this.formData.content = res[0].content
+      } catch {
+        this.$store.dispatch('Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
         })
-        .catch()
-    }
+      }
+    },
   },
 
   mounted() {
     this.getCategories()
     this.getInitialData()
-  }
+  },
 }
 </script>

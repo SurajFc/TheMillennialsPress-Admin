@@ -2,35 +2,19 @@
   <div class="section" style="margin-top: -60px;">
     <p class="has-text-centered is-size-4 is-success">Add Articles</p>
     <ValidationObserver ref="observer" v-slot="{ passes }">
-      <form
-        class="box"
-        enctype="multipart/form-data"
-        @submit.prevent="passes(saveArticle)"
-      >
-        <ValidationProvider
-          rules="required|min:20|max:200"
-          name="title"
-          v-slot="{ errors, valid }"
-        >
+      <form class="box" enctype="multipart/form-data" @submit.prevent="passes(saveArticle)">
+        <ValidationProvider rules="required|min:20|max:200" name="title" v-slot="{ errors, valid }">
           <b-field
             vertical
             label="Title"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors"
           >
-            <b-input
-              type="text"
-              v-model="formData.title"
-              placeholder="Article Title"
-            ></b-input>
+            <b-input type="text" v-model="formData.title" placeholder="Article Title"></b-input>
           </b-field>
         </ValidationProvider>
         <br />
-        <ValidationProvider
-          rules="required|max:250"
-          name="subtitle"
-          v-slot="{ errors, valid }"
-        >
+        <ValidationProvider rules="required|max:250" name="subtitle" v-slot="{ errors, valid }">
           <b-field
             horizontal
             label="SubTitle"
@@ -38,11 +22,7 @@
             :message="errors"
             custom-class="has-text-left"
           >
-            <b-input
-              type="text"
-              v-model="formData.subtitle"
-              placeholder="SubTitle"
-            ></b-input>
+            <b-input type="text" v-model="formData.subtitle" placeholder="SubTitle"></b-input>
           </b-field>
         </ValidationProvider>
         <br />
@@ -56,22 +36,17 @@
             custom-class="has-text-left"
           >
             <b-select placeholder="Select Category" v-model="formData.category">
-              <option value="">None</option>
+              <option value>None</option>
               <option
                 v-for="option in categories"
                 :value="option.id"
                 :key="option.id"
-                >{{ option.name }}
-              </option></b-select
-            >
+              >{{ option.name }}</option>
+            </b-select>
           </b-field>
         </ValidationProvider>
         <br />
-        <ValidationProvider
-          rules="required"
-          v-slot="{ errors, valid }"
-          name="Tags"
-        >
+        <ValidationProvider rules="required" v-slot="{ errors, valid }" name="Tags">
           <b-field
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors"
@@ -96,35 +71,23 @@
               rounded
               v-model="formData.tags"
               placeholder="Add a tag (max 20)"
-            >
-            </b-taginput>
+            ></b-taginput>
           </b-field>
         </ValidationProvider>
 
         <br />
-        <b-field
-          class="file"
-          label="Cover"
-          horizontal
-          custom-class="has-text-left"
-        >
+        <b-field class="file" label="Cover" horizontal custom-class="has-text-left">
           <b-upload v-model="cover" drag-drop>
             <a class="button is-primary">
               <b-icon icon="upload"></b-icon>
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-name" v-if="cover">
-            {{ cover.name }}
-          </span>
+          <span class="file-name" v-if="cover">{{ cover.name }}</span>
         </b-field>
         <br />
         <div class="section">
-          <ValidationProvider
-            rules="required|min:500"
-            name="Content"
-            v-slot="{ errors, valid }"
-          >
+          <ValidationProvider rules="required|min:500" name="Content" v-slot="{ errors, valid }">
             <b-field
               horizontal
               label="Content"
@@ -138,7 +101,9 @@
                 </p>
               </div>
               <div v-if="valid">
-                <p><b-icon type="is-success" icon="check-circle"></b-icon></p>
+                <p>
+                  <b-icon type="is-success" icon="check-circle"></b-icon>
+                </p>
               </div>
               <br />
             </b-field>
@@ -165,14 +130,9 @@
             :max-datetime="maxDatetime"
             position="is-top-right"
             :timepicker="{ hourFormat: '12' }"
-          >
-          </b-datetimepicker>
+          ></b-datetimepicker>
         </b-field>
-        <ValidationProvider
-          rules="required|min:5"
-          name="author"
-          v-slot="{ errors, valid }"
-        >
+        <ValidationProvider rules="required|min:5" name="author" v-slot="{ errors, valid }">
           <b-field
             horizontal
             label="Author"
@@ -190,9 +150,7 @@
         </ValidationProvider>
         <br />
         <div class="field has-text-centered">
-          <button class="button is-black" size="is-medium">
-            Save
-          </button>
+          <button class="button is-black" size="is-medium">Save</button>
         </div>
       </form>
     </ValidationObserver>
@@ -219,7 +177,7 @@ const toolbarOptions = [
   ['clean'],
   ['link', 'image', 'video', 'formula'],
 
-  ['emoji']
+  ['emoji'],
 ]
 
 export default {
@@ -227,7 +185,7 @@ export default {
 
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
 
   data() {
@@ -254,7 +212,7 @@ export default {
         tags: [],
         content: '<p>I am Example</p>',
         realease: new Date(),
-        author_name: ''
+        author_name: '',
       },
       editorOption: {
         // Some Quill options...
@@ -263,7 +221,7 @@ export default {
           toolbar: {
             container: toolbarOptions,
             handlers: {
-              image: this.imageHandler
+              image: this.imageHandler,
             },
             imageResize: true,
             ImageResize: {
@@ -271,21 +229,21 @@ export default {
               displayStyles: {
                 backgroundColor: 'black',
                 border: 'none',
-                color: 'white'
+                color: 'white',
               },
-              modules: ['Resize', 'DisplaySize', 'Toolbar']
-            }
+              modules: ['Resize', 'DisplaySize', 'Toolbar'],
+            },
           },
           history: {
             delay: 1000,
             maxStack: 50,
-            userOnly: false
+            userOnly: false,
           },
           'emoji-toolbar': true,
           'emoji-textarea': true,
-          'emoji-shortname': true
-        }
-      }
+          'emoji-shortname': true,
+        },
+      },
     }
   },
   methods: {
@@ -297,7 +255,7 @@ export default {
         console.log(error)
       }
     },
-    imageHandler() {
+    async imageHandler() {
       const input = document.createElement('input')
 
       input.setAttribute('type', 'file')
@@ -314,34 +272,32 @@ export default {
           // Save current cursor state
           const range = this.$refs.editor.quill.getSelection(true)
 
-
           // Move cursor to right side of image (easier to continue typing)
           this.$refs.editor.quill.setSelection(range.index + 1)
-          
-          try{
-            const res = this.$axios
-            .$post('article/images', formData)
-           
-              this.$refs.editor.quill.insertEmbed(
-                range.index,
-                'image',
-                `${this.$imageURL}${res.image}`)
-          
-          this.$store.dispatch('Toast',{
-                message: 'Image Uploaded Success',
-                type: 'is-success'
-              })
-             
-          }
-           catch{
-        this.$store.dispatch('Toast',{message:'Some Error',type:'is-danger'})
 
-           } // API post, returns image
-           
+          try {
+            const res = await this.$axios.$post('article/images', formData)
+
+            this.$refs.editor.quill.insertEmbed(
+              range.index,
+              'image',
+              `${this.$imageURL}${res.image}`
+            )
+
+            this.$store.dispatch('Toast', {
+              message: 'Image Uploaded Success',
+              type: 'is-success',
+            })
+          } catch {
+            this.$store.dispatch('Toast', {
+              message: 'Some Error',
+              type: 'is-danger',
+            })
+          } // API post, returns image
         } else {
-         this.$store.dispatch('Toast',{
+          this.$store.dispatch('Toast', {
             message: 'Size of image should be less than 1 MB',
-            type: 'is-danger'
+            type: 'is-danger',
           })
         }
         // location as string e.g. 'http://www.example.com/images/foo.png'
@@ -368,13 +324,18 @@ export default {
           fd.append(key, this.formData[key])
         }
       }
-      this.open()
-      this.$axios.$post('addarticle', fd).then(res => {
-        this.$router.push('/articles/viewarticle')
-        this.$store.dispatch('FetchItems')
-        this.Toast({ message: 'Succesfully Added', type: 'is-success' })
-      })
-      this.close()
+
+      try {
+        this.$axios.$post('addarticle', fd)
+      } catch {
+        this.$store.dispatch('Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
+        })
+      }
+      this.$store.dispatch('Toast', { message: 'Successfully Added' })
+      this.$store.dispatch('FetchItems')
+      this.$router.push('/articles/viewarticle')
     },
     // onChange(image) {
     //   console.log('New picture selected!')
@@ -394,11 +355,11 @@ export default {
     },
     onEditorReady(editor) {
       // console.log('editor ready!', editor)
-    }
+    },
   },
 
   mounted() {
     this.getCategories()
-  }
+  },
 }
 </script>

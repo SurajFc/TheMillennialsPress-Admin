@@ -3,7 +3,6 @@
     <section>
       <p class="has-text-centered is-size-4 is-success">
         View/Edit Articles
-
         <span class="is-pulled-right">
           <b-input
             placeholder="Search..."
@@ -12,8 +11,7 @@
             icon-clickable
             v-model="search"
             @icon-click="searchIconClick(search)"
-          >
-          </b-input>
+          ></b-input>
         </span>
       </p>
     </section>
@@ -36,47 +34,36 @@
       detail-key="id"
     >
       <template slot-scope="props">
-        <b-table-column label="#">
-          {{ props.index + 1 }}
-        </b-table-column>
-        <b-table-column field="title" label="Title" sortable>
-          {{ props.row.title | truncate(20) }}
-        </b-table-column>
+        <b-table-column label="#">{{ props.index + 1 }}</b-table-column>
+        <b-table-column field="title" label="Title" sortable>{{ props.row.title | truncate(20) }}</b-table-column>
         <b-table-column field="category_name" label="Category" sortable>
-          <span class="tag is-danger">
-            {{ props.row.category.name }}
-          </span>
+          <span class="tag is-danger">{{ props.row.category.name }}</span>
         </b-table-column>
         <b-table-column field="is_active" label="Active">
           <b-switch
             v-model="props.row.is_active"
             @input="ChangeStatus(props.row.is_active, props.row.id)"
-          >
-          </b-switch>
+          ></b-switch>
         </b-table-column>
         <b-table-column field="realease" label="Published At" sortable>
           <span class="tag is-success">
             {{
-              props.row.realease
-                ? new Date(props.row.realease).toLocaleDateString()
-                : 'unknown'
+            props.row.realease
+            ? new Date(props.row.realease).toLocaleDateString()
+            : 'unknown'
             }}
             {{
-              new Date(props.row.realease).toLocaleString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true,
-              })
+            new Date(props.row.realease).toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+            })
             }}
           </span>
         </b-table-column>
         <b-table-column label="Edit">
           <span>
-            <b-button
-              type="is-primary"
-              icon-right="pencil"
-              @click="EditArticle(props.row.slug)"
-            />
+            <b-button type="is-primary" icon-right="pencil" @click="EditArticle(props.row.slug)" />
           </span>
         </b-table-column>
         <b-table-column label="Preview">
@@ -86,9 +73,7 @@
             :to="props.row.slug"
             target="_blank"
             icon-left="eye"
-          >
-            view
-          </b-button>
+          >view</b-button>
         </b-table-column>
       </template>
       <template slot="detail" slot-scope="props">
@@ -101,7 +86,7 @@
           <div class="media-content">
             <div class="content">
               <p>
-                <small>Author </small>
+                <small>Author</small>
                 <strong>@{{ props.row.author_name }}</strong>
 
                 <br />
@@ -111,26 +96,24 @@
             <nav class="level is-mobile">
               <div class="level-left">
                 <a class="level-item">
-                  <span class="icon is-small"
-                    ><i class="fas fa-reply"></i
-                  ></span>
+                  <span class="icon is-small">
+                    <i class="fas fa-reply"></i>
+                  </span>
                 </a>
                 <a class="level-item">
-                  <span class="icon is-small"
-                    ><i class="fas fa-retweet"></i
-                  ></span>
+                  <span class="icon is-small">
+                    <i class="fas fa-retweet"></i>
+                  </span>
                 </a>
                 <a class="level-item">
-                  <span class="icon is-small"
-                    ><i class="fas fa-heart"></i
-                  ></span>
+                  <span class="icon is-small">
+                    <i class="fas fa-heart"></i>
+                  </span>
                 </a>
               </div>
             </nav>
           </div>
-          <div class="media-right has-bottom-right">
-            Added by: {{ props.row.user }}
-          </div>
+          <div class="media-right has-bottom-right">Added by: {{ props.row.user }}</div>
         </article>
       </template>
     </b-table>
@@ -138,10 +121,9 @@
 </template>
 
 <script>
-import toast from '../../mixins/toast.js'
 export default {
   name: 'ViewArticle',
-  mixins: [toast],
+
   data() {
     return {
       data: [],
@@ -152,23 +134,22 @@ export default {
       page: 1,
       total: 0,
       selected: null,
-      name: ''
+      name: '',
     }
   },
   filters: {
     truncate(value, length) {
       return value.length > length ? value.substr(0, length) + '...' : value
-    }
+    },
   },
 
   methods: {
     async getArticles() {
       await this.$axios
         .$get(`article/getall?page=${this.page}`)
-        .then(res => {
+        .then((res) => {
           this.data = res.results
           this.total = res.count
-          console.log('resss====>', res)
         })
         .catch()
     },
@@ -180,38 +161,56 @@ export default {
       }
       this.getArticles()
     },
-    ChangeStatus(value, id) {
-      console.log(value, id)
-      this.$axios
-        .$post('changestatus', {
+    async ChangeStatus(value, id) {
+      try {
+        const res = await this.$axios.$post('changestatus', {
           id: id,
-          active: value
+          active: value,
         })
-        .then(res => {
-          if (res.status == '1') {
-            this.Toast({ message: 'Success', type: 'is-success' })
-          }
+
+        if (res.status == '1') {
+          this.$store.dispatch('Toast')
+        }
+      } catch {
+        this.$store.dispatch('Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
         })
-        .catch(error => {
-          this.Toast({ message: 'Error', type: 'is-danger' })
-        })
+      }
     },
-    searchIconClick(value) {
-      this.$axios
-        .$get(`articles/search?q=${value}&page=${this.page}`)
-        .then(res => {
+    async searchIconClick(value) {
+      try {
+        const res = await this.$axios.$get(
+          `articles/search?q=${value}&page=${this.page}`
+        )
+        if (res.count >= 1) {
           this.data = res.results
           this.total = res.count
           this.onsearch = true
+          this.$store.dispatch('Toast', {
+            message: 'Result Found',
+            type: 'is-info',
+          })
+        } else {
+          this.$store.disaptch('Toast', {
+            message: 'No Results',
+            type: 'is-danger',
+          })
+        }
+      } catch {
+        this.$store.dispatch('Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
         })
+      }
     },
     EditArticle(slug) {
       this.$router.push(`/articles/edit/${slug}`)
-    }
+    },
   },
   mounted() {
     this.getArticles()
-  }
+  },
 }
 </script>
 

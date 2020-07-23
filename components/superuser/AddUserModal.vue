@@ -1,11 +1,7 @@
 <template>
   <div>
     <ValidationObserver ref="observer" v-slot="{ passes }">
-      <form
-        action
-        enctype="multipart/form-data"
-        @submit.prevent="passes(saveUser)"
-      >
+      <form action enctype="multipart/form-data" @submit.prevent="passes(saveUser)">
         <div class="modal-card" style="width: auto;">
           <header class="modal-card-head has-text-centered">
             <p class="modal-card-title">Edit User</p>
@@ -50,10 +46,7 @@
               </b-field>
             </ValidationProvider>
 
-            <ValidationProvider
-              rules="required|confirmed:password"
-              name="Password Confirmation"
-            >
+            <ValidationProvider rules="required|confirmed:password" name="Password Confirmation">
               <b-field
                 slot-scope="{ errors, valid }"
                 label="Confirm Password"
@@ -77,12 +70,8 @@
             </ValidationProvider>
           </section>
           <footer class="modal-card-foot">
-            <button class="button" type="button" @click="$parent.close()">
-              Close
-            </button>
-            <button class="button is-primary">
-              Save
-            </button>
+            <button class="button" type="button" @click="$parent.close()">Close</button>
+            <button class="button is-primary">Save</button>
           </footer>
         </div>
       </form>
@@ -93,34 +82,36 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import toast from '~/mixins/toast'
 
 export default {
-  mixins: [toast],
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
   data() {
     return {
       email: '',
       password: '',
-      confirmation: ''
+      confirmation: '',
     }
   },
   methods: {
     async saveUser() {
-      await this.$axios.$post('addsuperuser', {
-        email: this.email,
+      try {
+        await this.$axios.$post('addsuperuser', {
+          email: this.email,
 
-        password: this.password
-      })
+          password: this.password,
+        })
 
-      this.$emit('refreshdata1')
-      this.$parent.close()
-      this.Toast({ message: 'Succesfully Added', type: 'is-success' })
-    }
-  }
+        this.$emit('refreshdata1')
+        this.$parent.close()
+        this.$store.dispatch('Toast')
+      } catch {}
+
+      // this.Toast({ message: 'Succesfully Added', type: 'is-success' })
+    },
+  },
 }
 </script>
 
