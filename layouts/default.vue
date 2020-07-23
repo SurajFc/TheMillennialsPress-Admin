@@ -50,12 +50,14 @@
                       label="DashBoard"
                       tag="nuxt-link"
                       to="/"
+                      exact
                     ></b-menu-item>
                     <b-menu-item
                       icon="ab-testing"
                       to="/category"
                       label="Category"
                       tag="nuxt-link"
+                      exact
                     >
                       <!-- <b-menu-item icon="account" label="Users"></b-menu-item>
                       <b-menu-item
@@ -80,12 +82,14 @@
                         label="Add"
                         to="/articles/addarticle"
                         tag="nuxt-link"
+                        exact
                       ></b-menu-item>
                       <b-menu-item
                         icon="pencil-ruler"
                         label="View/Edit"
                         to="/articles/viewarticle"
                         tag="nuxt-link"
+                        exact
                       ></b-menu-item>
                     </b-menu-item>
 
@@ -94,18 +98,21 @@
                       label="Admins"
                       tag="nuxt-link"
                       to="/admins"
+                      exact
                     ></b-menu-item>
                     <b-menu-item
                       icon="currency-inr"
                       label="Donations"
                       tag="nuxt-link"
                       to="/donation"
+                      exact
                     ></b-menu-item>
                     <b-menu-item
                       icon="thumb-up-outline"
                       label="Feedbacks"
                       tag="nuxt-link"
                       to="/feedbacks"
+                      exact
                     ></b-menu-item>
                   </b-menu-list>
 

@@ -116,7 +116,7 @@ export default {
           cat: cat
         })
         this.loadCategory()
-        this.Toast({ message: 'Succesfully Deleted', type: 'is-danger' })
+this.$store.dispatch('Toast',{message:'Sucessfully deleted'});
       } catch (error) {
         console.log(error)
       }

@@ -1,34 +1,13 @@
-import Vuex from 'vuex'
+import Vuex from 'vuex';
+import Panel from '~/store/paneltop.js';
+import Toast from '~/store/toaster.js';
 
 const createStore = () => {
     return new Vuex.Store({
-    state:{
-        users:0,
-        articles:0,
-    },
-    mutations: {
-        setItems(state, items) {
-        console.log("====>",items)
-        state.users = items['users']
-        state.articles = items['articles']
-        }
-    },
-    actions: {
-        async FetchItems(vuexContext) {
-            const response = await this.$axios.$get('totalOverview');
-            console.log("inactions===>",response);
-
-            vuexContext.commit('setItems', response);
-        },
-    },
-    getters:{
-        getAll(state){
-            return {
-                'users':state.users,
-                'articles':state.articles
-            }
-        }
-    }
+   modules:{
+      Panel,
+      Toast
+   }
 })
 }
 export default createStore

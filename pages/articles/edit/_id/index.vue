@@ -356,7 +356,7 @@ export default {
       }
     },
 
-    async editArticle() {
+    editArticle() {
       this.formData.realease = this.$moment(this.formData.realease).format(
         'YYYY-MM-DD HH:mm'
       )
@@ -377,13 +377,10 @@ export default {
         }
       }
 
-      await this.$axios
-        .$post(`editarticle?q=${this.$route.params.id}`, fd)
-        .then(res => {
-          this.$router.push('/articles/viewarticle')
-          this.Toast({ message: 'Succesfully Edited', type: 'is-success' })
-        })
-        .catch()
+      this.$axios.$post(`editarticle?q=${this.$route.params.id}`, fd)
+
+      this.$router.push('/articles/viewarticle')
+      this.Toast({ message: 'Succesfully Edited', type: 'is-success' })
     },
     onChange(image) {
       console.log('New picture selected!')

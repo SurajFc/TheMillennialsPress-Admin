@@ -10,7 +10,8 @@
             type="search"
             icon="magnify"
             icon-clickable
-            @icon-click="searchIconClick"
+            v-model="search"
+            @icon-click="searchIconClick(search)"
           >
           </b-input>
         </span>
@@ -43,7 +44,7 @@
         </b-table-column>
         <b-table-column field="category_name" label="Category" sortable>
           <span class="tag is-danger">
-            {{ props.row.category_name }}
+            {{ props.row.category.name }}
           </span>
         </b-table-column>
         <b-table-column field="is_active" label="Active">
@@ -144,7 +145,8 @@ export default {
   data() {
     return {
       data: [],
-
+      onsearch: false,
+      search: '',
       loading: false,
       perPage: 10,
       page: 1,
@@ -154,9 +156,6 @@ export default {
     }
   },
   filters: {
-    /**
-     * Filter to truncate string, accepts a length parameter
-     */
     truncate(value, length) {
       return value.length > length ? value.substr(0, length) + '...' : value
     }
@@ -176,6 +175,9 @@ export default {
     onPageChange(page) {
       this.page = page
 
+      if (this.onsearch) {
+        this.searchIconClick(this.search)
+      }
       this.getArticles()
     },
     ChangeStatus(value, id) {
@@ -194,8 +196,14 @@ export default {
           this.Toast({ message: 'Error', type: 'is-danger' })
         })
     },
-    searchIconClick() {
-      alert('You wanna make a search?')
+    searchIconClick(value) {
+      this.$axios
+        .$get(`articles/search?q=${value}&page=${this.page}`)
+        .then(res => {
+          this.data = res.results
+          this.total = res.count
+          this.onsearch = true
+        })
     },
     EditArticle(slug) {
       this.$router.push(`/articles/edit/${slug}`)

@@ -201,7 +201,6 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import toast from '../..//mixins/toast.js'
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
@@ -225,10 +224,7 @@ const toolbarOptions = [
 
 export default {
   name: 'AddArticle',
-  // head: {
-  //   script: [{ src: 'js/image-resize.min.js' }]
-  // },
-  mixins: [toast],
+
   components: {
     ValidationObserver,
     ValidationProvider
@@ -318,33 +314,32 @@ export default {
           // Save current cursor state
           const range = this.$refs.editor.quill.getSelection(true)
 
-          console.log('here')
 
           // Move cursor to right side of image (easier to continue typing)
           this.$refs.editor.quill.setSelection(range.index + 1)
-
-          await this.$axios
+          
+          try{
+            const res = this.$axios
             .$post('article/images', formData)
-            .then(res => {
+           
               this.$refs.editor.quill.insertEmbed(
                 range.index,
                 'image',
-                `${this.$imageURL}${res.image}`
-              )
-              this.Toast({
+                `${this.$imageURL}${res.image}`)
+          
+          this.$store.dispatch('Toast',{
                 message: 'Image Uploaded Success',
                 type: 'is-success'
               })
-            })
-            .catch(e => {
-              this.Toast({
-                message: 'Some Error. Pls Try Again',
-                type: 'is-danger'
-              })
-            }) // API post, returns image
+             
+          }
+           catch{
+        this.$store.dispatch('Toast',{message:'Some Error',type:'is-danger'})
+
+           } // API post, returns image
+           
         } else {
-          console.log(file.size)
-          this.Toast({
+         this.$store.dispatch('Toast',{
             message: 'Size of image should be less than 1 MB',
             type: 'is-danger'
           })
@@ -353,7 +348,7 @@ export default {
       }
     },
 
-    async saveArticle() {
+    saveArticle() {
       this.formData.realease = this.$moment(this.formData.realease).format(
         'YYYY-MM-DD HH:mm'
       )
@@ -373,14 +368,13 @@ export default {
           fd.append(key, this.formData[key])
         }
       }
-
-      await this.$axios
-        .$post('addarticle', fd)
-        .then(res => {
-          this.$router.push('/articles/viewarticle')
-          this.Toast({ message: 'Succesfully Added', type: 'is-success' })
-        })
-        .catch()
+      this.open()
+      this.$axios.$post('addarticle', fd).then(res => {
+        this.$router.push('/articles/viewarticle')
+        this.$store.dispatch('FetchItems')
+        this.Toast({ message: 'Succesfully Added', type: 'is-success' })
+      })
+      this.close()
     },
     // onChange(image) {
     //   console.log('New picture selected!')

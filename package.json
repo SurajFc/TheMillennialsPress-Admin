@@ -18,7 +18,7 @@
     "nuxt-buefy": "^0.3.31",
     "nuxt-moment": "^1.0.5",
     "quill-emoji": "^0.1.7",
-    "quill-image-resize-module": "^3.0.0",
+ 
     "sass-loader": "^9.0.2",
     "vee-validate": "^3.3.7",
     "vue-quill-editor": "^3.0.6"
