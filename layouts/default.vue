@@ -25,8 +25,8 @@
         </b-navbar-item>
       </template>
     </b-navbar>
-
-    <div class="columns" style="margin-top: -2.75rem;">
+    <div v-if="loader" class="loading-page"></div>
+    <div v-else class="columns" style="margin-top: -2.75rem;">
       <div class="column is-2" style="margin-top: -2rem;">
         <div class="sidebar-page">
           <section class="sidebar-layout">
@@ -71,11 +71,7 @@
                         disabled
                       ></b-menu-item>-->
                     </b-menu-item>
-                    <b-menu-item
-                      icon="newspaper-variant"
-                      label="Articles"
-                      expanded
-                    >
+                    <b-menu-item icon="newspaper-variant" label="Articles" expanded>
                       <!-- <b-menu-item icon="account-box" label="Add"></b-menu-item> -->
                       <b-menu-item
                         icon="plus-circle-outline"
@@ -93,13 +89,7 @@
                       ></b-menu-item>
                     </b-menu-item>
 
-                    <b-menu-item
-                      icon="account"
-                      label="Admins"
-                      tag="nuxt-link"
-                      to="/admins"
-                      exact
-                    ></b-menu-item>
+                    <b-menu-item icon="account" label="Admins" tag="nuxt-link" to="/admins" exact></b-menu-item>
                     <b-menu-item
                       icon="currency-inr"
                       label="Donations"
@@ -117,16 +107,9 @@
                   </b-menu-list>
 
                   <b-menu-list label="Actions">
-                    <b-menu-item
-                      icon="shield-account-outline"
-                      to="/inspire"
-                      label="User"
-                    >
+                    <b-menu-item icon="shield-account-outline" to="/inspire" label="User">
                       <b-menu-item icon="account-box" label="Add"></b-menu-item>
-                      <b-menu-item
-                        icon="home-account"
-                        label="Edit"
-                      ></b-menu-item>
+                      <b-menu-item icon="home-account" label="Edit"></b-menu-item>
                     </b-menu-item>
                     <b-menu-item icon="logout" label="Logout"></b-menu-item>
                   </b-menu-list>
@@ -148,16 +131,22 @@
 
 <script>
 import PanelTop from '~/components/paneltop.vue'
+import { mapGetters } from 'vuex'
 export default {
   components: {
-    PanelTop
+    PanelTop,
+  },
+  computed: {
+    loader() {
+      return mapGetters['getloader']
+    },
   },
   methods: {
     async logoutUser() {
       await this.$auth.logout()
       this.$router.push('/login')
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -243,4 +232,19 @@ export default {
     }
   }
 }
+
+.loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding-top: 200px;
+  font-size: 30px;
+  font-family: sans-serif;
+}
 </style>
+
+

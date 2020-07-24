@@ -1,39 +1,22 @@
 <template>
   <ValidationObserver ref="observer" v-slot="{ passes }">
-    <form
-      action
-      enctype="multipart/form-data"
-      @submit.prevent="passes(saveCategory)"
-    >
+    <form action enctype="multipart/form-data" @submit.prevent="passes(saveCategory)">
       <div class="modal-card" style="width: auto;">
         <header class="modal-card-head has-text-centered">
           <p class="modal-card-title">Edit Category</p>
         </header>
         <section class="modal-card-body">
-          <ValidationProvider
-            rules="required|min:3|max:20"
-            name="Name"
-            v-slot="{ errors, valid }"
-          >
+          <ValidationProvider rules="required|min:3|max:20" name="Name" v-slot="{ errors, valid }">
             <b-field
               horizontal
               label="Name"
               :type="{ 'is-danger': errors[0], 'is-success': valid }"
               :message="errors"
             >
-              <b-input
-                type="text"
-                v-model="formData.name"
-                placeholder="Category Name"
-                required
-              ></b-input>
+              <b-input type="text" v-model="formData.name" placeholder="Category Name" required></b-input>
             </b-field>
           </ValidationProvider>
-          <ValidationProvider
-            rules="min:10|max:50"
-            name="description"
-            v-slot="{ errors, valid }"
-          >
+          <ValidationProvider rules="min:10|max:50" name="description" v-slot="{ errors, valid }">
             <b-field
               horizontal
               label="Description"
@@ -43,11 +26,7 @@
               <b-input type="textarea" v-model="formData.description"></b-input>
             </b-field>
           </ValidationProvider>
-          <ValidationProvider
-            rules="image|size:1024"
-            name="image"
-            v-slot="{ errors, valid }"
-          >
+          <ValidationProvider rules="image|size:1024" name="image" v-slot="{ errors, valid }">
             <b-field
               class="file"
               horizontal
@@ -73,12 +52,8 @@
           </ValidationProvider>
         </section>
         <footer class="modal-card-foot">
-          <button class="button" type="button" @click="$parent.close()">
-            Close
-          </button>
-          <button class="button is-primary" @click="saveCategory()">
-            Save
-          </button>
+          <button class="button" type="button" @click="$parent.close()">Close</button>
+          <button class="button is-primary" @click="saveCategory()">Save</button>
         </footer>
       </div>
     </form>
@@ -91,7 +66,7 @@ export default {
   props: ['name', 'description', 'image', 'id'],
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
 
   data() {
@@ -100,8 +75,8 @@ export default {
       formData: {
         cat: this.id,
         name: this.name,
-        description: this.description
-      }
+        description: this.description,
+      },
     }
   },
   methods: {
@@ -116,19 +91,23 @@ export default {
         for (var key in this.formData) {
           fd.append(key, this.formData[key])
         }
-
       }
       try {
         await this.$axios.$post('editcategory', fd)
-        //  this.RefreshCategory();
         this.$emit('refreshdata')
         this.$parent.close()
-       this.$store.dispatch('Toast',{ message: 'Edit  Success', type: 'is-info' })
+        this.$store.dispatch('Toast', {
+          message: 'Edit  Success',
+          type: 'is-info',
+        })
       } catch (error) {
-        this.$store.dispatch('Toast',{message:'Some Error',type:'is-danger'})
+        this.$store.dispatch('Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
+        })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>

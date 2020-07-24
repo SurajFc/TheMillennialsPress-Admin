@@ -107,30 +107,28 @@ export default {
   layout: 'blank',
   data() {
     return {
-      data: []
+      data: [],
     }
   },
   filters: {
-    capitalize: function(value) {
+    capitalize: function (value) {
       if (!value) return ''
       value = value.toString()
       return value.charAt(0).toUpperCase() + value.slice(1)
-    }
+    },
   },
   methods: {
     async getDetails() {
       await this.$axios
         .$get(`article/view/${this.$route.params.id}`)
-        .then(res => {
+        .then((res) => {
           this.data = res[0]
-          console.log(this.data)
-          console.log(this.data.cover)
         })
         .catch()
-    }
+    },
   },
   mounted() {
     this.getDetails()
-  }
+  },
 }
 </script>

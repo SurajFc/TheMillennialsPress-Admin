@@ -5,13 +5,16 @@ import {
   size,
   length,
   email,
+  digits
 } from 'vee-validate/dist/rules'
-import { extend } from 'vee-validate'
+import {
+  extend
+} from 'vee-validate'
 
 
 extend('size', {
   ...size,
-message: 'This image must be less than 1MB',
+  message: 'This image must be less than 1MB',
 })
 
 extend('required', {
@@ -22,6 +25,11 @@ extend('required', {
 extend('email', {
   ...email,
   message: 'This field must be a valid email',
+})
+
+extend('digits', {
+  ...digits,
+
 })
 
 extend('image', {
@@ -36,11 +44,13 @@ extend('confirmed', {
 
 extend('length', {
   ...length,
-  message: 'This field must have 2 options',
+  message: 'This field must have  options',
 })
 
 extend('min', {
-  validate(value, { min }) {
+  validate(value, {
+    min
+  }) {
     return value.length >= min
   },
   params: ['min'],
@@ -48,10 +58,23 @@ extend('min', {
 })
 
 extend('max', {
-  validate(value, { max }) {
+  validate(value, {
+    max
+  }) {
     return value.length < max
   },
   params: ['max'],
   message: 'The {_field_} field must be less than {max} characters'
 })
 
+
+
+// extend('otp', {
+//   validate(value, {
+//     otp
+//   }) {
+//     return value.length ==6
+//   },
+//   params: ['otp'],
+//   message: 'The {_field_} field have {otp} digits'
+// })

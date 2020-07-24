@@ -113,18 +113,25 @@ export default {
   },
   methods: {
     async saveUser() {
-      await this.$axios
-        .$post('superuserpass', {
+      try {
+        await this.$axios.$post('superuserpass', {
           user_id: this.user_id,
           old_password: this.old_password,
           password: this.password,
         })
-        .then((res) => {
-          this.$emit('refreshdata'),
-            this.Toast({ message: 'Success', type: 'is-info' })
+        this.$emit('refreshdata'),
+          this.$store.dispatch('Toast', {
+            message: 'Edit Success',
+            type: 'is-info',
+          })
+        this.$store.dispatch('FetchItems')
+      } catch {
+        this.$store.dispatch('Toast', {
+          message: 'Password Error',
+          type: 'is-danger',
         })
-
-        .finally(this.$parent.close())
+      }
+      this.$parent.close()
     },
   },
 }

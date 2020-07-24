@@ -1,15 +1,11 @@
-<template></template>
+<template>
+  <div>
+    <h1>dasboard</h1>
+  </div>
+</template>
 
 <script>
-export default {
-  methods: {
-    async logoutUser() {
-      await this.$auth.logout()
-      this.$router.push('/login')
-    },
-  },
-}
+export default {}
 </script>
 
-<style scoped>
-</style>
+<style></style>

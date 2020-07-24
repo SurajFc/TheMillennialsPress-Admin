@@ -100,20 +100,20 @@ export default {
       try {
         await this.$axios.$post('addsuperuser', {
           email: this.email,
-
           password: this.password,
         })
 
         this.$emit('refreshdata1')
+        this.$store.dispatch('FetchItems')
         this.$parent.close()
         this.$store.dispatch('Toast')
-      } catch {}
-
-      // this.Toast({ message: 'Succesfully Added', type: 'is-success' })
+      } catch {
+        this.$store.dispatch('Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
+        })
+      }
     },
   },
 }
 </script>
-
-<style>
-</style>

@@ -1,18 +1,18 @@
 <template>
-  <section class="hero is-medium">
-    <div class="container">
-      <h1 class="title">
-        <figure class="image">
-          <img src="~assets/4.png" />
-        </figure>
-      </h1>
-    </div>
-  </section>
+  <div class="has-text-centered">Error</div>
 </template>
 
-<script>
-export default {}
-</script>
-
-<style>
+<style scoped>
+.loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding-top: 200px;
+  font-size: 30px;
+  font-family: sans-serif;
+}
 </style>
