@@ -2,35 +2,19 @@
   <div class="section" style="margin-top: -60px;">
     <p class="has-text-centered is-size-4 is-success">Add Articles</p>
     <ValidationObserver ref="observer" v-slot="{ passes }">
-      <form
-        class="box"
-        enctype="multipart/form-data"
-        @submit.prevent="passes(saveArticle)"
-      >
-        <ValidationProvider
-          rules="required|min:20|max:200"
-          name="title"
-          v-slot="{ errors, valid }"
-        >
+      <form class="box" enctype="multipart/form-data" @submit.prevent="passes(saveArticle)">
+        <ValidationProvider rules="required|min:20|max:500" name="title" v-slot="{ errors, valid }">
           <b-field
             vertical
             label="Title"
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors"
           >
-            <b-input
-              type="text"
-              v-model="formData.title"
-              placeholder="Article Title"
-            ></b-input>
+            <b-input type="text" v-model="formData.title" placeholder="Article Title"></b-input>
           </b-field>
         </ValidationProvider>
         <br />
-        <ValidationProvider
-          rules="required|max:250"
-          name="subtitle"
-          v-slot="{ errors, valid }"
-        >
+        <ValidationProvider rules="required|max:500" name="subtitle" v-slot="{ errors, valid }">
           <b-field
             horizontal
             label="SubTitle"
@@ -38,11 +22,7 @@
             :message="errors"
             custom-class="has-text-left"
           >
-            <b-input
-              type="text"
-              v-model="formData.subtitle"
-              placeholder="SubTitle"
-            ></b-input>
+            <b-input type="text" v-model="formData.subtitle" placeholder="SubTitle"></b-input>
           </b-field>
         </ValidationProvider>
         <br />
@@ -61,17 +41,12 @@
                 v-for="option in categories"
                 :value="option.id"
                 :key="option.id"
-                >{{ option.name }}</option
-              >
+              >{{ option.name }}</option>
             </b-select>
           </b-field>
         </ValidationProvider>
         <br />
-        <ValidationProvider
-          rules="required"
-          v-slot="{ errors, valid }"
-          name="Tags"
-        >
+        <ValidationProvider rules="required" v-slot="{ errors, valid }" name="Tags">
           <b-field
             :type="{ 'is-danger': errors[0], 'is-success': valid }"
             :message="errors"
@@ -101,12 +76,7 @@
         </ValidationProvider>
 
         <br />
-        <b-field
-          class="file"
-          label="Cover"
-          horizontal
-          custom-class="has-text-left"
-        >
+        <b-field class="file" label="Cover" horizontal custom-class="has-text-left">
           <b-upload v-model="cover" drag-drop>
             <a class="button is-primary">
               <b-icon icon="upload"></b-icon>
@@ -117,11 +87,7 @@
         </b-field>
         <br />
         <div class="section">
-          <ValidationProvider
-            rules="required|min:500"
-            name="Content"
-            v-slot="{ errors, valid }"
-          >
+          <ValidationProvider rules="required|min:500" name="Content" v-slot="{ errors, valid }">
             <b-field
               horizontal
               label="Content"
@@ -166,11 +132,7 @@
             :timepicker="{ hourFormat: '12' }"
           ></b-datetimepicker>
         </b-field>
-        <ValidationProvider
-          rules="required|min:5"
-          name="author"
-          v-slot="{ errors, valid }"
-        >
+        <ValidationProvider rules="required|min:5" name="author" v-slot="{ errors, valid }">
           <b-field
             horizontal
             label="Author"
@@ -366,10 +328,10 @@ export default {
       try {
         await this.$axios.$post('addarticle', fd)
       } catch {
-        this.$store.dispatch('Toast', {
-          message: 'Some Error',
-          type: 'is-danger',
-        })
+        // this.$store.dispatch('Toast', {
+        //   message: 'Some Error',
+        //   type: 'is-danger',mnsdf
+        // })
       }
       this.$router.push('/articles/viewarticle')
       this.$store.dispatch('Toast', { message: 'Successfully Added' })
