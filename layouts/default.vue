@@ -88,6 +88,7 @@
                         exact
                       ></b-menu-item>
                     </b-menu-item>
+                    <b-menu-item icon="pencil-ruler" label="Trending" exact></b-menu-item>
 
                     <b-menu-item icon="account" label="Admins" tag="nuxt-link" to="/admins" exact></b-menu-item>
                     <b-menu-item
