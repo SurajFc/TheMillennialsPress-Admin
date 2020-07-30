@@ -106,18 +106,18 @@
                 </p>
               </div>
               <br />
-
-              <client-only>
-                <quill-editor
-                  v-model="formData.content"
-                  :options="editorOption"
-                  ref="editor"
-                  @blur="onEditorBlur($event)"
-                  @focus="onEditorFocus($event)"
-                  @ready="onEditorReady($event)"
-                />
-              </client-only>
             </b-field>
+            <client-only>
+              <quill-editor
+                v-model="formData.content"
+                :options="editorOption"
+                ref="editor"
+                @blur="onEditorBlur($event)"
+                @focus="onEditorFocus($event)"
+                @ready="onEditorReady($event)"
+              />
+            </client-only>
+
             <div></div>
           </ValidationProvider>
         </div>
@@ -364,3 +364,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.quill-editor {
+  height: 500px;
+  margin-bottom: 20px;
+}
+</style>

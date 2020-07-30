@@ -88,7 +88,7 @@
                         exact
                       ></b-menu-item>
                     </b-menu-item>
-                    <b-menu-item icon="pencil-ruler" label="Trending" exact></b-menu-item>
+                    <b-menu-item icon="ghost" label="Trending" tag="nuxt-link" to="/trending" exact></b-menu-item>
 
                     <b-menu-item icon="account" label="Admins" tag="nuxt-link" to="/admins" exact></b-menu-item>
                     <b-menu-item
@@ -99,20 +99,19 @@
                       exact
                     ></b-menu-item>
                     <b-menu-item
+                      icon="link"
+                      label="Usefull Links"
+                      tag="nuxt-link"
+                      to="/links"
+                      exact
+                    ></b-menu-item>
+                    <b-menu-item
                       icon="thumb-up-outline"
                       label="Feedbacks"
                       tag="nuxt-link"
                       to="/feedbacks"
                       exact
                     ></b-menu-item>
-                  </b-menu-list>
-
-                  <b-menu-list label="Actions">
-                    <b-menu-item icon="shield-account-outline" to="/inspire" label="User">
-                      <b-menu-item icon="account-box" label="Add"></b-menu-item>
-                      <b-menu-item icon="home-account" label="Edit"></b-menu-item>
-                    </b-menu-item>
-                    <b-menu-item icon="logout" label="Logout"></b-menu-item>
                   </b-menu-list>
                 </b-menu>
               </div>
