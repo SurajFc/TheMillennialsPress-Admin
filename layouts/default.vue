@@ -112,6 +112,13 @@
                       to="/feedbacks"
                       exact
                     ></b-menu-item>
+                    <b-menu-item
+                      icon="facebook"
+                      label="Social Links"
+                      tag="nuxt-link"
+                      to="/social"
+                      exact
+                    ></b-menu-item>
                   </b-menu-list>
                 </b-menu>
               </div>
