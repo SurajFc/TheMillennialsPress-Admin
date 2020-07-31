@@ -252,6 +252,10 @@ export default {
   font-size: 30px;
   font-family: sans-serif;
 }
+
+a:hover {
+  color: coral;
+}
 </style>
 
 
