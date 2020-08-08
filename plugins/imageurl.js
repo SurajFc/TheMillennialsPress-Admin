@@ -1,4 +1,4 @@
 export default (context, inject) => {
   // Inject $hello(msg) in Vue, context and store.
-  inject('imageURL', 'https://themillennialspress.com/')
+  inject('imageURL', 'https://api.themillennialspress.com/')
 }
