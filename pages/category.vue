@@ -91,9 +91,7 @@ export default {
       try {
         const ip = await this.$axios.$get('category')
         this.data = ip
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     },
     async deleteCategory(cat) {
       try {
@@ -102,9 +100,7 @@ export default {
         })
         this.loadCategory()
         this.$store.dispatch('Toast', { message: 'Sucessfully deleted' })
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     },
     EditCardModal(id) {
       this.$buefy.modal.open({

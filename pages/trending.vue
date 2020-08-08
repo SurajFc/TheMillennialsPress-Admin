@@ -137,7 +137,7 @@ export default {
           this.data = res.results
           this.total = res.count
         })
-        .catch(console.log('heyb'))
+        .catch()
     },
     onPageChange(page) {
       this.page = page

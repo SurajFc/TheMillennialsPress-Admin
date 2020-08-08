@@ -127,7 +127,6 @@ export default {
           email: this.email,
         })
         .then((res) => {
-          console.log(res)
           if (res['status'] == 1) {
             this.step = 2
             this.$store.dispatch('Toast', {
@@ -151,7 +150,6 @@ export default {
           otp: this.otp,
         })
         .then((res) => {
-          console.log(res)
           if (res['status'] == 1) {
             this.$store.dispatch('Toast', {
               message: 'OTP Verified',
@@ -179,9 +177,7 @@ export default {
             })
           }
         })
-        .catch((e) => {
-          console.log('here')
-        })
+        .catch((e) => {})
     },
   },
 }

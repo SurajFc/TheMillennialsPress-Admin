@@ -265,9 +265,7 @@ export default {
       try {
         const ip = await this.$axios.$get('category')
         this.categories = ip
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     },
 
     imageHandler() {
@@ -355,11 +353,9 @@ export default {
       }
     },
     onChange(image) {
-      console.log('New picture selected!')
       if (image) {
         this.cover = image
       } else {
-        console.log('FileReader API not supported: use the <form>, Luke!')
       }
     },
 

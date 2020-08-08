@@ -69,7 +69,6 @@ export default {
       ssr: false,
     },
     '~/plugins/axios',
-
   ],
   /*
    ** Auto import components
@@ -92,14 +91,14 @@ export default {
     '@nuxtjs/auth',
     'nuxt-moment',
     'cookie-universal-nuxt',
-    'vue-wait/nuxt',
+
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://localhost:8000/superadmin',
+    baseURL: 'http://themillennialspress.com/superadmin',
   },
   /*
    ** Build configuration

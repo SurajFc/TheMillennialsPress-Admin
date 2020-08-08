@@ -252,9 +252,7 @@ export default {
       try {
         const ip = await this.$axios.$get('category')
         this.categories = ip
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     },
     async imageHandler() {
       const input = document.createElement('input')

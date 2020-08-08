@@ -19,7 +19,7 @@
         </ValidationProvider>
 
         <ValidationProvider
-          rules="min:6|max:20"
+          rules="min:6|max:40"
           vid="password"
           name="Password"
           v-slot="{ errors, valid }"
@@ -112,7 +112,6 @@ export default {
     if (this.$cookies.get('auth._token.local')) {
       this.onSubmit()
     } else {
-      console.log('here')
     }
   },
 }
