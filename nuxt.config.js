@@ -114,7 +114,7 @@ export default {
 
   router: {
     middleware: ['auth'],
-    base: '/news/',
+    base: '/admin/',
   },
 
   auth: {

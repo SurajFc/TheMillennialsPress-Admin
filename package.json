@@ -22,8 +22,8 @@
     "quill-emoji": "^0.1.7",
     "sass-loader": "^9.0.2",
     "vee-validate": "^3.3.7",
-    "vue-quill-editor": "^3.0.6"
-
+    "vue-quill-editor": "^3.0.6",
+    "vue-wait": "^1.4.8"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",
