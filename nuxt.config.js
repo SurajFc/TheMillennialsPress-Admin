@@ -15,8 +15,7 @@ export default {
    */
   head: {
     title: process.env.npm_package_name || 'The Millennials Press',
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8',
       },
       {
@@ -26,18 +25,15 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content:
-          process.env.npm_package_description ||
+        content: process.env.npm_package_description ||
           'Admin site of the Millennials',
       },
     ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
-    ],
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+    }, ],
   },
   loading: {
     color: 'green',
@@ -114,7 +110,7 @@ export default {
 
   router: {
     middleware: ['auth'],
-    base: '/admin/',
+
   },
 
   auth: {
