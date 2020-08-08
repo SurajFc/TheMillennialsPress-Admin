@@ -22,7 +22,7 @@
     "quill-emoji": "^0.1.7",
     "sass-loader": "^9.0.2",
     "vee-validate": "^3.3.7",
-    "vue-quill-editor": "^3.0.6",
+    "vue-quill-editor": "^3.0.6"
 
   },
   "devDependencies": {
