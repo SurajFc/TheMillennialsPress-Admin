@@ -15,7 +15,8 @@ export default {
    */
   head: {
     title: process.env.npm_package_name || '',
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8',
       },
       {
@@ -28,11 +29,13 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico',
-    }, ],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico',
+      },
+    ],
   },
   loading: {
     color: 'green',
@@ -78,7 +81,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [],
+  buildModules: ['@nuxtjs/dotenv'],
   /*
    ** Nuxt.js modules
    */
@@ -91,14 +94,13 @@ export default {
     '@nuxtjs/auth',
     'nuxt-moment',
     'cookie-universal-nuxt',
-
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://themillennialspress.com/superadmin',
+    baseURL: process.env.server_url,
   },
   /*
    ** Build configuration
