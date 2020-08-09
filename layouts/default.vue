@@ -25,8 +25,8 @@
         </b-navbar-item>
       </template>
     </b-navbar>
-    <div v-if="loader" class="loading-page"></div>
-    <div v-else class="columns" style="margin-top: -2.75rem;">
+
+    <div class="columns" style="margin-top: -2.75rem;">
       <div class="column is-2" style="margin-top: -2rem;">
         <div class="sidebar-page">
           <section class="sidebar-layout">
@@ -143,11 +143,7 @@ export default {
   components: {
     PanelTop,
   },
-  computed: {
-    loader() {
-      return mapGetters['getloader']
-    },
-  },
+
   methods: {
     async logoutUser() {
       await this.$auth.logout()

@@ -160,7 +160,7 @@ export default {
 
   methods: {
     async getArticles() {
-      await this.$store.dispatch('getArticles', { page: this.page })
+      await this.$store.dispatch('articles/getArticles', { page: this.page })
       this.total = this.$store.getters.CurrentArticles.total
       this.data = this.$store.getters.CurrentArticles.results
     },
@@ -180,10 +180,10 @@ export default {
         })
 
         if (res.status == '1') {
-          this.$store.dispatch('Toast')
+          this.$store.dispatch('toaster/Toast')
         }
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })
@@ -198,18 +198,18 @@ export default {
           this.data = res.results
           this.total = res.count
           this.onsearch = true
-          this.$store.dispatch('Toast', {
+          this.$store.dispatch('toaster/Toast', {
             message: 'Result Found',
             type: 'is-info',
           })
         } else {
-          this.$store.disaptch('Toast', {
+          this.$store.disaptch('toaster/Toast', {
             message: 'No Results',
             type: 'is-danger',
           })
         }
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error or No Results',
           type: 'is-danger',
         })

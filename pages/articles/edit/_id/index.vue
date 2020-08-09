@@ -308,18 +308,18 @@ export default {
               `${this.$imageURL}${res.image}`
             )
 
-            this.$store.dispatch('Toast', {
+            this.$store.dispatch('toaster/Toast', {
               message: 'Image Uploaded Success',
               type: 'is-success',
             })
           } catch {
-            this.$store.dispatch('Toast', {
+            this.$store.dispatch('toaster/Toast', {
               message: 'Some Error',
               type: 'is-danger',
             })
           } // API post, returns image
         } else {
-          this.$store.dispatch('Toast', {
+          this.$store.dispatch('toaster/Toast', {
             message: 'Size of image should be less than 1 MB',
             type: 'is-danger',
           })
@@ -350,14 +350,14 @@ export default {
       }
       try {
         await this.$axios.$post(`editarticle?q=${this.$route.params.id}`, fd)
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Successfully Edit',
           type: 'is-info',
         })
-        await this.$store.dispatch('getArticles', { page: 1 })
+        await this.$store.dispatch('articles/getArticles', { page: 1 })
         this.$router.push('/articles/viewarticle')
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })
@@ -393,7 +393,7 @@ export default {
         this.formData.realease = new Date(res[0].realease)
         this.formData.content = res[0].content
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })

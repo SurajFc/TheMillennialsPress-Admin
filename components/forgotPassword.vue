@@ -129,14 +129,14 @@ export default {
         .then((res) => {
           if (res['status'] == 1) {
             this.step = 2
-            this.$store.dispatch('Toast', {
+            this.$store.dispatch('toaster/Toast', {
               message: 'OTP Send. Check your Email',
               type: 'is-success',
             })
           }
         })
         .catch((e) => {
-          this.$store.dispatch('Toast', {
+          this.$store.dispatch('toaster/Toast', {
             message: 'Error No user Found',
             type: 'is-danger',
           })
@@ -151,7 +151,7 @@ export default {
         })
         .then((res) => {
           if (res['status'] == 1) {
-            this.$store.dispatch('Toast', {
+            this.$store.dispatch('toaster/Toast', {
               message: 'OTP Verified',
               type: 'is-success',
             })
@@ -160,7 +160,7 @@ export default {
           }
         })
         .catch((e) => {
-          this.$store.dispatch('Toast', {
+          this.$store.dispatch('toaster/Toast', {
             message: 'Wrong OTP',
             type: 'is-danger',
           })
@@ -171,7 +171,7 @@ export default {
         .$post('newpass', { email: this.email })
         .then((res) => {
           if (res['status'] == 1) {
-            this.$store.dispatch('Toast', {
+            this.$store.dispatch('toaster/Toast', {
               message: 'New Password sent. Check your Email',
               type: 'is-success',
             })

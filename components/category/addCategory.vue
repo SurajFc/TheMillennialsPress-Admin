@@ -1,33 +1,19 @@
 <template>
   <ValidationObserver ref="observer" v-slot="{ passes }">
-    <form
-      action
-      class="box"
-      enctype="multipart/form-data"
-      @submit.prevent="passes(saveCategory)"
-    >
+    <form action class="box" enctype="multipart/form-data" @submit.prevent="passes(saveCategory)">
       <div class="modal-card" style="width: auto;">
         <header class="modal-card-head has-text-centered">
           <p class="modal-card-title">Add Category</p>
         </header>
         <section class="modal-card-body">
-          <ValidationProvider
-            rules="required|min:3|max:20"
-            name="Name"
-            v-slot="{ errors, valid }"
-          >
+          <ValidationProvider rules="required|min:3|max:20" name="Name" v-slot="{ errors, valid }">
             <b-field
               horizontal
               label="Name"
               :type="{ 'is-danger': errors[0], 'is-success': valid }"
               :message="errors"
             >
-              <b-input
-                type="text"
-                v-model="formData.name"
-                placeholder="Category Name"
-                required
-              ></b-input>
+              <b-input type="text" v-model="formData.name" placeholder="Category Name" required></b-input>
             </b-field>
           </ValidationProvider>
           <ValidationProvider
@@ -69,9 +55,7 @@
           </ValidationProvider>
         </section>
         <footer class="modal-card-foot">
-          <button class="button" type="button" @click="$parent.close()">
-            Close
-          </button>
+          <button class="button" type="button" @click="$parent.close()">Close</button>
           <button class="button is-primary">Save</button>
         </footer>
       </div>
@@ -84,7 +68,7 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate'
 export default {
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
 
   data() {
@@ -92,8 +76,8 @@ export default {
       file: null,
       formData: {
         name: this.name,
-        description: this.description
-      }
+        description: this.description,
+      },
     }
   },
   methods: {
@@ -109,13 +93,16 @@ export default {
         await this.$axios.$post('category', fd)
         this.$emit('refreshdata1')
         this.$parent.close()
-        this.$store.dispatch('Toast',{message:'Successfully Added'})
+        this.$store.dispatch('toaster/Toast', { message: 'Successfully Added' })
         // this.Toast({ message: 'Succesfully Added', type: 'is-success' })
       } catch (error) {
-        this.$store.dispatch('Toast',{message:'Some Error',type:'is-danger'})
+        this.$store.dispatch('toaster/Toast', {
+          message: 'Some Error',
+          type: 'is-danger',
+        })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>

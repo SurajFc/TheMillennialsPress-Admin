@@ -164,10 +164,10 @@ export default {
         })
 
         if (res.status == '1') {
-          this.$store.dispatch('Toast')
+          this.$store.dispatch('toaster/Toast')
         }
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })

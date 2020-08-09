@@ -112,7 +112,9 @@ export default {
           cat: cat,
         })
         this.loadCategory()
-        this.$store.dispatch('Toast', { message: 'Sucessfully deleted' })
+        this.$store.dispatch('toaster/Toast', {
+          message: 'Sucessfully deleted',
+        })
       } catch (error) {}
     },
     EditCardModal(id) {

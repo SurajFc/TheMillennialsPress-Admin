@@ -1,6 +1,8 @@
-const state = {
-  total: 0,
-  data: []
+const state = () => {
+  return {
+    total: 0,
+    data: []
+  }
 };
 
 const getters = {

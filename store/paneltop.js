@@ -1,6 +1,8 @@
-const state = {
-  users: 0,
-  articles: 0,
+const state = () => {
+  return {
+    users: 0,
+    articles: 0
+  }
 };
 const mutations = {
   setItems(state, items) {

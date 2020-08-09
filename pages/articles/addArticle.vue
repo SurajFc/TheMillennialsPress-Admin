@@ -294,18 +294,18 @@ export default {
               `${this.$imageURL}${res.image}`
             )
 
-            this.$store.dispatch('Toast', {
+            this.$store.dispatch('toaster/Toast', {
               message: 'Image Uploaded Success',
               type: 'is-success',
             })
           } catch {
-            this.$store.dispatch('Toast', {
+            this.$store.dispatch('toaster/Toast', {
               message: 'Some Error',
               type: 'is-danger',
             })
           } // API post, returns image
         } else {
-          this.$store.dispatch('Toast', {
+          this.$store.dispatch('toaster/Toast', {
             message: 'Size of image should be less than 1 MB',
             type: 'is-danger',
           })
@@ -344,7 +344,7 @@ export default {
         // })
       }
       this.$router.push('/articles/viewarticle')
-      this.$store.dispatch('Toast', { message: 'Successfully Added' })
+      this.$store.dispatch('toaster/Toast', { message: 'Successfully Added' })
       this.$store.dispatch('FetchItems')
     },
     // onChange(image) {

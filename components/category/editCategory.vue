@@ -96,12 +96,12 @@ export default {
         await this.$axios.$post('editcategory', fd)
         this.$emit('refreshdata')
         this.$parent.close()
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Edit  Success',
           type: 'is-info',
         })
       } catch (error) {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })

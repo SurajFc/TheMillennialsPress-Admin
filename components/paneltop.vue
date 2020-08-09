@@ -5,7 +5,7 @@
         <b-icon icon="account" custom-size="mdi-18px"></b-icon>
         <span class="is-size-7">Users</span>
       </p>
-      <p class="title">{{ $store.getters.getAll.users }}</p>
+      <p class="title">{{ getAll.users }}</p>
     </div>
     <div class="column has-text-centered card">
       <div>
@@ -13,7 +13,7 @@
           <b-icon icon="newspaper-variant" custom-size="mdi-18px"></b-icon>
           <span class="is-size-7">Articles</span>
         </p>
-        <p class="title">{{ $store.getters.getAll.articles }}</p>
+        <p class="title">{{ getAll.articles }}</p>
       </div>
     </div>
     <div class="column has-text-centered card">
@@ -38,10 +38,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'paneltop',
+  computed: {
+    ...mapGetters({
+      getAll: 'paneltop/getAll',
+    }),
+  },
   created() {
-    this.$store.dispatch('FetchItems')
+    this.$store.dispatch('paneltop/FetchItems')
   },
 }
 </script>

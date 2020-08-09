@@ -91,7 +91,7 @@ export default {
         })
         this.$router.push('/')
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })

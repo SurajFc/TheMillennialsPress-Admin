@@ -82,7 +82,7 @@ export default {
         this.data = res.results
         this.total = res.count
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })
@@ -98,9 +98,9 @@ export default {
         const res = await this.$axios.$post(`editsuperuser?q=${id}`, {
           is_active: value,
         })
-        this.$store.dispatch('Toast')
+        this.$store.dispatch('toaster/Toast')
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })

@@ -5,7 +5,7 @@ export default ({
   $axios.interceptors.request.use(
     (config) => {
 
-      store.dispatch('setLoader')
+
 
       return config
     },
@@ -16,7 +16,6 @@ export default ({
 
   $axios.interceptors.response.use(
     (response) => {
-      store.dispatch('UnsetLoader')
 
 
       return response

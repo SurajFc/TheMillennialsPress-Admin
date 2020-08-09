@@ -120,13 +120,13 @@ export default {
           password: this.password,
         })
         this.$emit('refreshdata'),
-          this.$store.dispatch('Toast', {
+          this.$store.dispatch('toaster/Toast', {
             message: 'Edit Success',
             type: 'is-info',
           })
         this.$store.dispatch('FetchItems')
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Password Error',
           type: 'is-danger',
         })

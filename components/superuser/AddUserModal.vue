@@ -106,9 +106,9 @@ export default {
         this.$emit('refreshdata1')
         this.$store.dispatch('FetchItems')
         this.$parent.close()
-        this.$store.dispatch('Toast')
+        this.$store.dispatch('toaster/Toast')
       } catch {
-        this.$store.dispatch('Toast', {
+        this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',
           type: 'is-danger',
         })
