@@ -16,6 +16,18 @@
 import LoginForm from '../components/LoginForm.vue'
 export default {
   layout: 'blank',
+  head() {
+    return {
+      title: 'Login | The Millennials Press Admin',
+      meta: [
+        {
+          hid: 'Login',
+          name: 'Login',
+          content: 'Login | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
   components: {
     LoginForm,
   },

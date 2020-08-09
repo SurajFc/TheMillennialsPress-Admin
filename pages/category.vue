@@ -77,6 +77,19 @@ export default {
     CategoryEditForm,
     AddCategoryForm,
   },
+  head() {
+    return {
+      title: 'Category | The Millennials Press Admin',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'Category',
+          name: 'Category',
+          content: 'Category | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
 
   data() {
     return {

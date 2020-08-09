@@ -115,6 +115,19 @@
 <script>
 export default {
   name: 'ViewArticle',
+  head() {
+    return {
+      title: 'Trending | The Millennials Press Admin',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'Trending',
+          name: 'Trending',
+          content: 'Trending | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
   data() {
     return {
       data: [],

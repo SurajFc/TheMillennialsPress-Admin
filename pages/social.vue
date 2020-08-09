@@ -24,7 +24,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  head() {
+    return {
+      title: 'Social Links | The Millennials Press Admin',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'Social Links',
+          name: 'Social Links',
+          content: 'Social Links | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
+}
 </script>
 
 

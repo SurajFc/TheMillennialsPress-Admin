@@ -183,7 +183,18 @@ const toolbarOptions = [
 
 export default {
   name: 'AddArticle',
-
+  head() {
+    return {
+      title: 'ADD Article | The Millennials Press Admin',
+      meta: [
+        {
+          hid: 'Add Article ',
+          name: 'Add Article',
+          content: 'Edit article | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
   components: {
     ValidationObserver,
     ValidationProvider,

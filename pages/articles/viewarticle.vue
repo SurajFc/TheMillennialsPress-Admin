@@ -35,9 +35,11 @@
     >
       <template slot-scope="props">
         <b-table-column label="#">{{ props.index + 1 }}</b-table-column>
-        <b-table-column field="title" label="Title" sortable>{{
+        <b-table-column field="title" label="Title" sortable>
+          {{
           props.row.title | truncate(20)
-        }}</b-table-column>
+          }}
+        </b-table-column>
         <b-table-column field="category_name" label="Category" sortable>
           <span class="tag is-danger">{{ props.row.category.name }}</span>
         </b-table-column>
@@ -50,26 +52,22 @@
         <b-table-column field="realease" label="Published At" sortable>
           <span class="tag is-success">
             {{
-              props.row.realease
-                ? new Date(props.row.realease).toLocaleDateString()
-                : 'unknown'
+            props.row.realease
+            ? new Date(props.row.realease).toLocaleDateString()
+            : 'unknown'
             }}
             {{
-              new Date(props.row.realease).toLocaleString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true,
-              })
+            new Date(props.row.realease).toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+            })
             }}
           </span>
         </b-table-column>
         <b-table-column label="Edit">
           <span>
-            <b-button
-              type="is-primary"
-              icon-right="pencil"
-              @click="EditArticle(props.row.slug)"
-            />
+            <b-button type="is-primary" icon-right="pencil" @click="EditArticle(props.row.slug)" />
           </span>
         </b-table-column>
         <b-table-column label="Preview">
@@ -79,8 +77,7 @@
             :to="props.row.slug"
             target="_blank"
             icon-left="eye"
-            >view</b-button
-          >
+          >view</b-button>
         </b-table-column>
       </template>
       <template slot="detail" slot-scope="props">
@@ -120,9 +117,7 @@
               </div>
             </nav>
           </div>
-          <div class="media-right has-bottom-right">
-            Added by: {{ props.row.user }}
-          </div>
+          <div class="media-right has-bottom-right">Added by: {{ props.row.user }}</div>
         </article>
       </template>
     </b-table>
@@ -132,7 +127,18 @@
 <script>
 export default {
   name: 'ViewArticle',
-
+  head() {
+    return {
+      title: 'Articles | The Millennials Press Admin',
+      meta: [
+        {
+          hid: 'Article ',
+          name: 'Article',
+          content: 'article | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
   data() {
     return {
       data: [],

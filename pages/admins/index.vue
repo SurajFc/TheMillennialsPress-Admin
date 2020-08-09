@@ -54,6 +54,18 @@ import EditUserModal from '~/components/superuser/EditUserModal'
 import AddUserModal from '~/components/superuser/AddUserModal'
 
 export default {
+  head() {
+    return {
+      title: 'Admin | The Millennials Press Admin',
+      meta: [
+        {
+          hid: 'Admin ',
+          name: 'Admin',
+          content: 'Admin | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
   data() {
     return {
       page: 1,

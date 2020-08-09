@@ -194,7 +194,18 @@ const toolbarOptions = [
 
 export default {
   name: 'AddArticle',
-
+  head() {
+    return {
+      title: this.$route.params.id + ' | The Millennials Press Admin',
+      meta: [
+        {
+          hid: 'EDit Article ',
+          name: 'Edit Article',
+          content: 'Edit article | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
   components: {
     ValidationObserver,
     ValidationProvider,

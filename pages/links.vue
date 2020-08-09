@@ -62,7 +62,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  head() {
+    return {
+      title: 'UseFull Links | The Millennials Press Admin',
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'UseFull Links',
+          name: 'UseFull Links',
+          content: 'UseFull Links | The Millennials Press Admin',
+        },
+      ],
+    }
+  },
+}
 </script>
 
 <style scoped>
