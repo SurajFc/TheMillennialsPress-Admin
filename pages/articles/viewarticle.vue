@@ -160,7 +160,7 @@ export default {
 
   methods: {
     async getArticles() {
-      await this.$store.dispatch('articles/getArticles', { page: this.page })
+      await this.$store.dispatch('article/getArticles', { page: this.page })
       this.total = this.$store.getters.CurrentArticles.total
       this.data = this.$store.getters.CurrentArticles.results
     },

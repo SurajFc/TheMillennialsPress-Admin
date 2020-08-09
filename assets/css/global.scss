@@ -19,62 +19,46 @@ $linkedin: #0077B5;
 $linkedin-invert:findColorInvert($linkedin);
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
-$colors: (
-  'white': (
-    $white,
+$colors: ('white': ($white,
     $black,
   ),
-  'black': (
-    $black,
+  'black': ($black,
     $white,
   ),
-  'light': (
-    $light,
+  'light': ($light,
     $light-invert,
   ),
-  'dark': (
-    $dark,
+  'dark': ($dark,
     $dark-invert,
   ),
-  'primary': (
-    $primary,
+  'primary': ($primary,
     $primary-invert,
   ),
-  'info': (
-    $info,
+  'info': ($info,
     $info-invert,
   ),
-  'success': (
-    $success,
+  'success': ($success,
     $success-invert,
   ),
-  'warning': (
-    $warning,
+  'warning': ($warning,
     $warning-invert,
   ),
-  'danger': (
-    $danger,
+  'danger': ($danger,
     $danger-invert,
   ),
-'secondary':(
-  $secondary,
-  $secondary-invert
-),
-  
-  'twitter': (
-    $twitter,
+  'secondary':($secondary,
+    $secondary-invert),
+
+  'twitter': ($twitter,
     $twitter-invert,
   ),
 
-  'facebook': (
-    $facebook,
+  'facebook': ($facebook,
     $facebook-invert,
   ),
-  'linkedin':(
-    $linkedin,
+  'linkedin':($linkedin,
     $linkedin-invert,
-  )
-);
+  ));
 
 // Links
 $link: $primary;
@@ -104,11 +88,11 @@ $table-row-active-background-color: $secondary;
 $datepicker-background-color:$white;
 $datepicker-header-color:$white;
 $datepicker-header-color:$danger;
-$datepicker-radius	:50px;
+$datepicker-radius:50px;
+
+
 
 
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
-
-

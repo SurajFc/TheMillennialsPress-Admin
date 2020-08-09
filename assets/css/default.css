@@ -1,0 +1,4 @@
+.nuxt-link-active {
+  background-color: #040404;
+  color: #fff !important;
+}
