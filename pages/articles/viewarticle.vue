@@ -125,6 +125,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'ViewArticle',
   head() {
@@ -138,6 +139,11 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    ...mapGetters({
+      mydata: 'article/CurrentArticles',
+    }),
   },
   data() {
     return {
@@ -161,8 +167,8 @@ export default {
   methods: {
     async getArticles() {
       await this.$store.dispatch('article/getArticles', { page: this.page })
-      this.total = this.$store.getters.CurrentArticles.total
-      this.data = this.$store.getters.CurrentArticles.results
+      this.total = this.mydata.total
+      this.data = this.mydata.results
     },
     onPageChange(page) {
       this.page = page
