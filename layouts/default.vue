@@ -89,6 +89,7 @@
                       ></b-menu-item>
                     </b-menu-item>
                     <b-menu-item icon="ghost" label="Trending" tag="nuxt-link" to="/trending" exact></b-menu-item>
+                    <b-menu-item icon="arrow-up-thick" label="Top" tag="nuxt-link" to="/top" exact></b-menu-item>
                     <b-menu-item icon="video" label="Videos" tag="nuxt-link" to="/videos" exact></b-menu-item>
 
                     <b-menu-item icon="account" label="Admins" tag="nuxt-link" to="/admins" exact></b-menu-item>
