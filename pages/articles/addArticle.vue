@@ -149,6 +149,19 @@
             ></b-input>
           </b-field>
         </ValidationProvider>
+
+        <br />
+        <ValidationProvider rules="required|min:5" name="Source" v-slot="{ errors, valid }">
+          <b-field
+            horizontal
+            label="Source"
+            custom-class="has-text-left "
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
+          >
+            <b-input type="text" v-model="formData.source" placeholder="source" style="width: 33%;"></b-input>
+          </b-field>
+        </ValidationProvider>
         <br />
         <div class="field has-text-centered">
           <button class="button is-black" size="is-medium">Save</button>
@@ -225,6 +238,7 @@ export default {
         content: '<p>I am Example</p>',
         realease: new Date(),
         author_name: '',
+        source: 'Millennials Team',
       },
       editorOption: {
         // Some Quill options...

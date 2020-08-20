@@ -161,6 +161,18 @@
           </b-field>
         </ValidationProvider>
         <br />
+        <ValidationProvider rules="required|min:5" name="Source" v-slot="{ errors, valid }">
+          <b-field
+            horizontal
+            label="Source"
+            custom-class="has-text-left "
+            :type="{ 'is-danger': errors[0], 'is-success': valid }"
+            :message="errors"
+          >
+            <b-input type="text" v-model="formData.source" placeholder="source" style="width: 33%;"></b-input>
+          </b-field>
+        </ValidationProvider>
+        <br />
         <div class="field has-text-centered">
           <button class="button is-black" size="is-medium">Save</button>
         </div>
@@ -238,6 +250,7 @@ export default {
         content: '<p>I am Example</p>',
         realease: null,
         author_name: '',
+        source: '',
       },
       editorOption: {
         // Some Quill options...
@@ -384,6 +397,7 @@ export default {
         const res = await this.$axios.$get(
           `article/view/${this.$route.params.id}`
         )
+
         this.formData.title = res[0].title
         this.formData.author_name = res[0].author_name
         this.formData.tags = res[0].tags
@@ -392,6 +406,7 @@ export default {
         this.formData.category = res[0].category
         this.formData.realease = new Date(res[0].realease)
         this.formData.content = res[0].content
+        this.formData.source = res[0].source
       } catch {
         this.$store.dispatch('toaster/Toast', {
           message: 'Some Error',

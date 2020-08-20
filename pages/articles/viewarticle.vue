@@ -119,6 +119,14 @@
           </div>
           <div class="media-right has-bottom-right">Added by: {{ props.row.user }}</div>
         </article>
+        <div class="is-pulled-left">
+          Total count:
+          <span v-if="props.row.count">{{ props.row.count }}</span>
+          <span v-else>0</span>
+        </div>
+        <div class="is-pulled-right">
+          <span>Source: {{props.row.source}}</span>
+        </div>
       </template>
     </b-table>
   </div>
@@ -169,6 +177,7 @@ export default {
       await this.$store.dispatch('article/getArticles', { page: this.page })
       this.total = this.mydata.total
       this.data = this.mydata.results
+      console.log('articles==>', this.mydata.results)
     },
     onPageChange(page) {
       this.page = page
@@ -225,7 +234,7 @@ export default {
       this.$router.push(`/articles/edit/${slug}`)
     },
   },
-  created() {
+  mounted() {
     this.getArticles()
   },
 }

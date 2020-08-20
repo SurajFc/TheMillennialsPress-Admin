@@ -152,7 +152,6 @@ export default {
       this.$axios
         .$get(`getTopNews?page=${this.page}`)
         .then((res) => {
-          console.log('res--==>', res)
           this.data = res.results
           this.total = res.count
         })
