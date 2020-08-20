@@ -101,6 +101,13 @@
                       exact
                     ></b-menu-item>
                     <b-menu-item
+                      icon="newspaper"
+                      label="Newsletter"
+                      tag="nuxt-link"
+                      to="/newsletter"
+                      exact
+                    ></b-menu-item>
+                    <b-menu-item
                       icon="link"
                       label="Usefull Links"
                       tag="nuxt-link"

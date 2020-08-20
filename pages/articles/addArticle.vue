@@ -121,7 +121,7 @@
             <div></div>
           </ValidationProvider>
         </div>
-        <b-field label="Publish Time" horizontal custom-class="has-text-left ">
+        <b-field label="Publish Time" horizontal custom-class="has-text-left publish">
           <b-datetimepicker
             style="width: 33%;"
             placeholder="Type or select a date..."
