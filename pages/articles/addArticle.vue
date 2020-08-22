@@ -56,21 +56,21 @@
           >
             <template slot="label">
               Tags
-              <b-tooltip type="is-dark" label="Each Tag max length is 20">
+              <b-tooltip type="is-dark" label="Each Tag max length is 50">
                 <b-icon size="is-small" icon="help-circle-outline"></b-icon>
               </b-tooltip>
             </template>
 
             <b-taginput
               ellipsis
-              maxlength="20"
-              maxtags="20"
+              maxlength="50"
+              maxtags="25"
               icon="label"
               has-counter
               type="is-secondary"
               rounded
               v-model="formData.tags"
-              placeholder="Add a tag (max 20)"
+              placeholder="Add a tag (max 25)"
             ></b-taginput>
           </b-field>
         </ValidationProvider>
@@ -151,7 +151,7 @@
         </ValidationProvider>
 
         <br />
-        <ValidationProvider rules="required|min:5" name="Source" v-slot="{ errors, valid }">
+        <ValidationProvider rules="required|min:3" name="Source" v-slot="{ errors, valid }">
           <b-field
             horizontal
             label="Source"
