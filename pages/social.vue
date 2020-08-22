@@ -37,7 +37,7 @@
       </li>
       <li>
         <p class="is-size-3">
-          <a href="https://t.me/joinchat/Q_6CUBw-NoMTd0apf0keLw" target="_blank">Telegram:</a>
+          <a href="https://t.me/joinchat/TheMillenialsPress" target="_blank">Telegram:</a>
           <span class="is-size-5">https://t.me/joinchat/Q_6CUBw-NoMTd0apf0keLw</span>
         </p>
       </li>
