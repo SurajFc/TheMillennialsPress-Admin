@@ -161,6 +161,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
+
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
   ['blockquote', 'code-block'],
@@ -172,14 +173,13 @@ const toolbarOptions = [
   [{ size: ['small', false, 'large', 'huge'] }],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ color: [] }, { background: [] }],
-
   [{ font: [] }],
   [{ align: [] }],
   ['clean'],
-  ['link', 'image', 'video', 'formula'],
+  ['link', 'image', 'video', 'formula']
 
-  ['emoji'],
 ]
+
 
 export default {
   name: 'AddArticle',
@@ -190,16 +190,16 @@ export default {
   },
 
   data() {
-    const min = new Date()
-    min.setDate(min.getDate() - 0)
-    min.setHours(min.getHours())
-    min.setMinutes(min.getMinutes())
-    min.setSeconds(min.getSeconds())
-    const max = new Date()
-    max.setDate(max.getDate() + 7)
-    max.setHours(18)
-    max.setMinutes(0)
-    max.setSeconds(0)
+    const min = new Date();
+    min.setDate(min.getDate() - 0);
+    min.setHours(min.getHours());
+    min.setMinutes(min.getMinutes());
+    min.setSeconds(min.getSeconds());
+    const max = new Date();
+    max.setDate(max.getDate() + 7);
+    max.setHours(18);
+    max.setMinutes(0);
+    max.setSeconds(0);
 
     return {
       categories: [],
@@ -240,9 +240,7 @@ export default {
             maxStack: 50,
             userOnly: false,
           },
-          'emoji-toolbar': true,
-          'emoji-textarea': true,
-          'emoji-shortname': true,
+          
         },
       },
     }
@@ -332,7 +330,7 @@ export default {
         //   type: 'is-danger',mnsdf
         // })
       }
-      this.$router.push('/articles/viewarticle')
+      await this.$router.push('/articles/viewarticle')
       this.$store.dispatch('Toast', { message: 'Successfully Added' })
       this.$store.dispatch('FetchItems')
     },
@@ -362,6 +360,8 @@ export default {
   },
 }
 </script>
+
+
 <style scoped>
 .quill-editor {
   height: 500px;

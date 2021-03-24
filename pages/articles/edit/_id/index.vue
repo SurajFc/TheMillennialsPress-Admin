@@ -188,9 +188,8 @@ const toolbarOptions = [
   [{ align: [] }],
   ['clean'],
   ['link', 'image', 'video', 'formula'],
-
-  ['emoji'],
 ]
+
 
 export default {
   name: 'AddArticle',
@@ -253,9 +252,7 @@ export default {
             maxStack: 50,
             userOnly: false,
           },
-          'emoji-toolbar': true,
-          'emoji-textarea': true,
-          'emoji-shortname': true,
+         
         },
       },
     }

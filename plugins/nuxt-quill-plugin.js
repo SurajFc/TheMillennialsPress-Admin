@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import VueQuillEditor from 'vue-quill-editor'
-import quillemoji from 'quill-emoji';
+
 // import { ImageResize } from '../components/imageresize/ImageResize';
 
 // import ImageResize from 'quill-image-resize-module'
@@ -9,7 +9,6 @@ import quillemoji from 'quill-emoji';
 // Quill.register('modules/imageResize', ImageResize)
 
 Vue.use(VueQuillEditor)
-Vue.use(quillemoji)
 
 // Quill.register("modules/imageResize", ImageResize);
 

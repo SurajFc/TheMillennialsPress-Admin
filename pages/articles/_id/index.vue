@@ -101,8 +101,10 @@
     </div>
   </div>
 </template>
+
+
+
 <script>
-//720 X 240
 export default {
   layout: 'blank',
   data() {
